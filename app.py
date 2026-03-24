@@ -17,6 +17,7 @@ GENERATED_DIR = os.path.join(os.path.dirname(__file__), "generated")
 os.makedirs(GENERATED_DIR, exist_ok=True)
 
 DOCUMENT_LABELS = {
+    # ── Existing documents ──
     "loe_hourly":          "Letter of Engagement — Hourly Rate",
     "loe_fixed":           "Letter of Engagement — Fixed Fee",
     "preliminary_report":  "Preliminary Report",
@@ -27,6 +28,14 @@ DOCUMENT_LABELS = {
     "notice_particulars":  "Notice for Particulars",
     "appearance_hc":       "Memorandum of Appearance — High Court",
     "appearance_cc":       "Memorandum of Appearance — Circuit Court",
+    # ── Litigation lifecycle ──
+    "motion":              "Notice of Motion",
+    "opposition":          "Notice of Opposition",
+    "reply":               "Reply",
+    "mediation_brief":     "Mediation Position Paper",
+    "ex_parte":            "Ex Parte Application + Grounding Affidavit",
+    # ── Billing ──
+    "fee_note":            "Professional Fee Note",
 }
 
 

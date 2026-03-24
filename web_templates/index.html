@@ -732,6 +732,224 @@
         </div>
       </div>
 
+      <!-- ─── LITIGATION DOCUMENTS ─── -->
+      <div class="section-card" id="sec-litigation">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">gavel</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Litigation Documents</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
+          <div class="col-span-12">
+            <p class="text-xs text-slate-400 mb-1">Used for: Notice of Motion, Opposition, Reply, Mediation Brief, Ex Parte Application. Fields below feed all litigation document types — leave unused fields blank.</p>
+          </div>
+          <!-- Row 1 -->
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Return / Hearing Date</label>
+            <input name="lit_return_date" class="dwf-input" placeholder="e.g. 14 April 2026"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Mediation Date <span class="text-slate-400 font-normal text-[10px]">— Mediation Brief</span></label>
+            <input name="lit_mediation_date" class="dwf-input" placeholder="e.g. 20 May 2026"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Mediator Name</label>
+            <input name="lit_mediator_name" class="dwf-input" placeholder="e.g. John Doe SC"/>
+          </div>
+          <!-- Row 2 -->
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Deponent Name <span class="text-slate-400 font-normal text-[10px]">— Ex Parte Affidavit</span></label>
+            <input name="lit_deponent_name" class="dwf-input" placeholder="e.g. Jane Doe"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Deponent Capacity</label>
+            <input name="lit_deponent_capacity" class="dwf-input" placeholder="e.g. Solicitor"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Settlement Authority <span class="text-slate-400 font-normal text-[10px]">— Mediation (W/P)</span></label>
+            <input name="lit_settlement_range" class="dwf-input" placeholder="e.g. Up to €25,000 (without prejudice)"/>
+          </div>
+          <!-- Relief Sought -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Relief Sought <span class="text-slate-400 font-normal">(one item per line — used in Motion &amp; Ex Parte)</span></label>
+            <textarea name="lit_relief_sought" class="dwf-input" rows="3"
+              placeholder="An Order for Liberty to Inspect the locus in quo&#10;An Order for Discovery of Documents&#10;Such further or other relief as this Honourable Court deems fit&#10;Costs"></textarea>
+          </div>
+          <!-- Grounds -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Grounds <span class="text-slate-400 font-normal">(one ground per line — used in Motion, Opposition, Reply, Ex Parte)</span></label>
+            <textarea name="lit_grounds" class="dwf-input" rows="4"
+              placeholder="The Defendant is entitled to inspect the locus in quo pursuant to Order 31 Rule 18 of the Rules of the Superior Courts&#10;The inspection is necessary for the fair disposal of the proceedings&#10;No prejudice will be suffered by the Plaintiff by reason of such inspection&#10;It is just and convenient that such an Order be made"></textarea>
+          </div>
+          <!-- Opposition-specific grounds -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Opposition Grounds <span class="text-slate-400 font-normal">(leave blank to reuse Grounds above — Notice of Opposition only)</span></label>
+            <textarea name="lit_opposition_grounds" class="dwf-input" rows="3"
+              placeholder="The application is premature&#10;No good reason has been advanced for the relief sought&#10;The Plaintiff would suffer prejudice..."></textarea>
+          </div>
+          <!-- Reply-specific grounds -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Reply Points <span class="text-slate-400 font-normal">(leave blank to reuse Grounds above — Reply only)</span></label>
+            <textarea name="lit_reply_grounds" class="dwf-input" rows="3"
+              placeholder="The Plaintiff's Opposition mischaracterises the basis of the application&#10;The grounds advanced in the Notice of Motion remain valid and are not displaced..."></textarea>
+          </div>
+          <!-- Ex Parte urgency -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Reason for Ex Parte Relief <span class="text-slate-400 font-normal">(why notice cannot be given — Ex Parte only)</span></label>
+            <textarea name="lit_urgent_reasons" class="dwf-input" rows="2"
+              placeholder="The Applicant apprehends that giving notice of this application would render it nugatory in that the Respondent would take steps to..."></textarea>
+          </div>
+          <!-- Mediation position -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Client's Position Statement <span class="text-slate-400 font-normal">(Mediation Brief — overrides Liability field if filled)</span></label>
+            <textarea name="lit_position_statement" class="dwf-input" rows="3"
+              placeholder="The Defendant denies liability in its entirety. The Plaintiff was the author of his/her own misfortune..."></textarea>
+          </div>
+          <!-- Key Issues -->
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Key Issues in Dispute <span class="text-slate-400 font-normal">(Mediation Brief — one per line)</span></label>
+            <textarea name="lit_key_issues" class="dwf-input" rows="3"
+              placeholder="Liability&#10;Quantum&#10;Contributory Negligence&#10;Loss of Earnings&#10;Special Damages"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── BILLING / FEE NOTE ─── -->
+      <div class="section-card" id="sec-billing">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">receipt_long</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Billing / Professional Fee Note</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 hidden">
+          <!-- Bill metadata -->
+          <div class="grid grid-cols-12 gap-5 mb-6">
+            <div class="col-span-4 space-y-1">
+              <label class="dwf-label">Bill Number</label>
+              <input name="bill_no" class="dwf-input" placeholder="Auto-generated if blank"/>
+            </div>
+            <div class="col-span-4 space-y-1">
+              <label class="dwf-label">Bill Date</label>
+              <input name="bill_date" class="dwf-input" placeholder="e.g. 24 March 2026"/>
+            </div>
+            <div class="col-span-4 space-y-1">
+              <label class="dwf-label">Period of Services</label>
+              <input name="billing_period" class="dwf-input" placeholder="e.g. January – March 2026"/>
+            </div>
+          </div>
+
+          <!-- TIME ENTRIES -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider">Time Entries</h3>
+              <button type="button" onclick="addTimeEntry()"
+                class="flex items-center gap-1 px-3 py-1 rounded border border-dwf-pink text-dwf-pink text-[11px] font-semibold hover:bg-dwf-pink hover:text-white transition-all">
+                <span class="material-symbols-outlined text-[14px]">add</span> Add Row
+              </button>
+            </div>
+            <!-- Header -->
+            <div class="grid grid-cols-12 gap-1 px-2 py-1 bg-dwf-navy rounded-t text-white text-[10px] font-bold uppercase tracking-wider">
+              <div class="col-span-2">Date</div>
+              <div class="col-span-2">Fee Earner</div>
+              <div class="col-span-5">Description of Work</div>
+              <div class="col-span-1 text-center">Hrs</div>
+              <div class="col-span-1 text-right">Rate €</div>
+              <div class="col-span-1 text-right"></div>
+            </div>
+            <!-- Rows container -->
+            <div id="timeEntries" class="space-y-1 mt-1">
+              <!-- 3 default rows -->
+              <div class="te-row grid grid-cols-12 gap-1 items-center">
+                <input name="te_date_0" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+                <input name="te_earner_0" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Partner"/>
+                <input name="te_desc_0" class="dwf-input col-span-5 text-[11px]" placeholder="Reviewing pleadings, advising on strategy..."/>
+                <input name="te_hours_0" class="dwf-input col-span-1 text-[11px] text-center" placeholder="2.5" oninput="calcRow(this)"/>
+                <input name="te_rate_0" class="dwf-input col-span-1 text-[11px] text-right" placeholder="300" oninput="calcRow(this)"/>
+                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
+              </div>
+              <div class="te-row grid grid-cols-12 gap-1 items-center">
+                <input name="te_date_1" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+                <input name="te_earner_1" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Associate"/>
+                <input name="te_desc_1" class="dwf-input col-span-5 text-[11px]" placeholder="Drafting Notice for Particulars..."/>
+                <input name="te_hours_1" class="dwf-input col-span-1 text-[11px] text-center" placeholder="1.5" oninput="calcRow(this)"/>
+                <input name="te_rate_1" class="dwf-input col-span-1 text-[11px] text-right" placeholder="250" oninput="calcRow(this)"/>
+                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
+              </div>
+              <div class="te-row grid grid-cols-12 gap-1 items-center">
+                <input name="te_date_2" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+                <input name="te_earner_2" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Paralegal"/>
+                <input name="te_desc_2" class="dwf-input col-span-5 text-[11px]" placeholder="Filing, correspondence, scheduling..."/>
+                <input name="te_hours_2" class="dwf-input col-span-1 text-[11px] text-center" placeholder="3.0" oninput="calcRow(this)"/>
+                <input name="te_rate_2" class="dwf-input col-span-1 text-[11px] text-right" placeholder="150" oninput="calcRow(this)"/>
+                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
+              </div>
+            </div>
+            <!-- Time charges subtotal -->
+            <div class="flex justify-end mt-2 pr-1">
+              <span class="text-[11px] text-slate-500 mr-2">Professional Charges Subtotal:</span>
+              <span id="teSubtotal" class="text-[12px] font-bold text-dwf-navy">€0.00</span>
+            </div>
+          </div>
+
+          <!-- DISBURSEMENTS -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider">Disbursements</h3>
+              <button type="button" onclick="addDisbRow()"
+                class="flex items-center gap-1 px-3 py-1 rounded border border-dwf-pink text-dwf-pink text-[11px] font-semibold hover:bg-dwf-pink hover:text-white transition-all">
+                <span class="material-symbols-outlined text-[14px]">add</span> Add Row
+              </button>
+            </div>
+            <div class="grid grid-cols-12 gap-1 px-2 py-1 bg-dwf-navy rounded-t text-white text-[10px] font-bold uppercase tracking-wider">
+              <div class="col-span-2">Date</div>
+              <div class="col-span-8">Description</div>
+              <div class="col-span-2 text-right">Amount €</div>
+            </div>
+            <div id="disbRows" class="space-y-1 mt-1">
+              <div class="disb-row grid grid-cols-12 gap-1 items-center">
+                <input name="disb_date_0" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+                <input name="disb_desc_0" class="dwf-input col-span-8 text-[11px]" placeholder="e.g. Counsel's fee — Advice on Proofs"/>
+                <input name="disb_amount_0" class="dwf-input col-span-2 text-[11px] text-right" placeholder="2500" oninput="calcDisb()"/>
+              </div>
+              <div class="disb-row grid grid-cols-12 gap-1 items-center">
+                <input name="disb_date_1" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+                <input name="disb_desc_1" class="dwf-input col-span-8 text-[11px]" placeholder="e.g. Engineer's report fee"/>
+                <input name="disb_amount_1" class="dwf-input col-span-2 text-[11px] text-right" placeholder="800" oninput="calcDisb()"/>
+              </div>
+            </div>
+            <div class="flex justify-end mt-2 pr-1">
+              <span class="text-[11px] text-slate-500 mr-2">Disbursements Subtotal:</span>
+              <span id="disbSubtotal" class="text-[12px] font-bold text-dwf-navy">€0.00</span>
+            </div>
+          </div>
+
+          <!-- TOTALS PREVIEW -->
+          <div class="bg-white border border-dwf-border rounded-lg p-4 space-y-2">
+            <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider mb-3">Invoice Preview</h3>
+            <div class="flex justify-between text-[12px]">
+              <span class="text-slate-600">Professional Charges</span>
+              <span id="prevCharges" class="font-medium">€0.00</span>
+            </div>
+            <div class="flex justify-between text-[12px]">
+              <span class="text-slate-600">VAT @ <span id="vatRateLabel">23</span>%</span>
+              <span id="prevVat" class="font-medium">€0.00</span>
+            </div>
+            <div class="flex justify-between text-[12px]">
+              <span class="text-slate-600">Disbursements</span>
+              <span id="prevDisb" class="font-medium">€0.00</span>
+            </div>
+            <div class="border-t border-dwf-border pt-2 flex justify-between">
+              <span class="text-[13px] font-bold text-dwf-navy">TOTAL NOW DUE</span>
+              <span id="prevTotal" class="text-[14px] font-bold text-dwf-pink">€0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="pb-16"></div>
     </div>
   </main>
@@ -810,6 +1028,38 @@
           <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
         </label>
         {% endfor %}
+      </section>
+
+      <!-- LITIGATION LIFECYCLE -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Litigation Lifecycle</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">5 items</span>
+        </div>
+        {% for key, label in [
+          ('motion','Notice of Motion'),
+          ('opposition','Notice of Opposition'),
+          ('reply','Reply'),
+          ('mediation_brief','Mediation Position Paper'),
+          ('ex_parte','Ex Parte + Grounding Affidavit')
+        ] %}
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
+        </label>
+        {% endfor %}
+      </section>
+
+      <!-- BILLING -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Billing</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">1 item</span>
+        </div>
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="fee_note" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">Professional Fee Note</span>
+        </label>
       </section>
 
       <!-- Select / Clear -->
@@ -1008,6 +1258,99 @@ document.getElementById('outlookBtn').addEventListener('click', function() {
 });
 </script>
 <script>
+// ─── BILLING LIVE CALCULATOR ───
+
+let teCount = 3;   // already have rows 0-2
+let disbCount = 2; // already have rows 0-1
+
+function fmt(n) {
+  return '€' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function getVatRate() {
+  const v = document.querySelector('input[name="vat_rate"]');
+  const rate = parseFloat(v ? v.value : 23) || 23;
+  document.getElementById('vatRateLabel').textContent = rate;
+  return rate / 100;
+}
+
+function calcRow(inp) {
+  const row = inp.closest('.te-row');
+  const hrs = parseFloat(row.querySelector('[name*="te_hours_"]').value) || 0;
+  const rate = parseFloat(row.querySelector('[name*="te_rate_"]').value) || 0;
+  row.querySelector('.te-amt').textContent = fmt(hrs * rate);
+  recalcTotals();
+}
+
+function calcDisb() { recalcTotals(); }
+
+function recalcTotals() {
+  let fees = 0;
+  document.querySelectorAll('.te-row').forEach(row => {
+    const hrs = parseFloat(row.querySelector('[name*="te_hours_"]')?.value) || 0;
+    const rate = parseFloat(row.querySelector('[name*="te_rate_"]')?.value) || 0;
+    fees += hrs * rate;
+  });
+
+  let disb = 0;
+  document.querySelectorAll('.disb-row').forEach(row => {
+    disb += parseFloat(row.querySelector('[name*="disb_amount_"]')?.value) || 0;
+  });
+
+  const vatRate = getVatRate();
+  const vat = fees * vatRate;
+  const total = fees + vat + disb;
+
+  document.getElementById('teSubtotal').textContent = fmt(fees);
+  document.getElementById('disbSubtotal').textContent = fmt(disb);
+  document.getElementById('prevCharges').textContent = fmt(fees);
+  document.getElementById('prevVat').textContent = fmt(vat);
+  document.getElementById('prevDisb').textContent = fmt(disb);
+  document.getElementById('prevTotal').textContent = fmt(total);
+}
+
+function addTimeEntry() {
+  const n = teCount++;
+  const row = document.createElement('div');
+  row.className = 'te-row grid grid-cols-12 gap-1 items-center';
+  row.innerHTML = `
+    <input name="te_date_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+    <input name="te_earner_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="Fee Earner"/>
+    <input name="te_desc_${n}" class="dwf-input col-span-5 text-[11px]" placeholder="Description of work..."/>
+    <input name="te_hours_${n}" class="dwf-input col-span-1 text-[11px] text-center" placeholder="0.0" oninput="calcRow(this)"/>
+    <input name="te_rate_${n}" class="dwf-input col-span-1 text-[11px] text-right" placeholder="0" oninput="calcRow(this)"/>
+    <div class="col-span-1 flex items-center gap-1">
+      <span class="text-[11px] font-semibold text-dwf-navy te-amt flex-1 text-right px-1">€0</span>
+      <button type="button" onclick="this.closest('.te-row').remove();recalcTotals()"
+        class="text-slate-400 hover:text-red-500 transition-colors" title="Remove">
+        <span class="material-symbols-outlined text-[14px]">close</span>
+      </button>
+    </div>`;
+  document.getElementById('timeEntries').appendChild(row);
+}
+
+function addDisbRow() {
+  const n = disbCount++;
+  const row = document.createElement('div');
+  row.className = 'disb-row grid grid-cols-12 gap-1 items-center';
+  row.innerHTML = `
+    <input name="disb_date_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
+    <input name="disb_desc_${n}" class="dwf-input col-span-7 text-[11px]" placeholder="Disbursement description"/>
+    <input name="disb_amount_${n}" class="dwf-input col-span-2 text-[11px] text-right" placeholder="0" oninput="calcDisb()"/>
+    <button type="button" onclick="this.closest('.disb-row').remove();calcDisb()"
+      class="col-span-1 text-slate-400 hover:text-red-500 transition-colors text-center" title="Remove">
+      <span class="material-symbols-outlined text-[14px]">close</span>
+    </button>`;
+  document.getElementById('disbRows').appendChild(row);
+}
+
+// Recalc when VAT rate field is changed
+document.addEventListener('input', e => {
+  if (e.target.name === 'vat_rate') recalcTotals();
+});
+
+// ─── FORCE WHITE NAV TEXT ───
+
 // Force white nav text after Tailwind CDN finishes processing
 function applyNavColors() {
   document.querySelectorAll('#sideNav a.nav-item').forEach(el => {

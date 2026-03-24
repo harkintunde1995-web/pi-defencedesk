@@ -1228,3 +1228,616 @@ class DocumentGenerator:
         court_short = "HC" if "high" in court_override.lower() else "CC"
         ref = self.get("matter_ref", "app")
         return self._save(doc, self._safe_filename(ref, plaintiff, f"Appearance_{court_short}"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 11. NOTICE OF MOTION
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_motion(self):
+        doc = self._new_doc()
+        self._court_caption(doc, font="Times New Roman")
+
+        plaintiff   = self.get("plaintiff_name")
+        client      = self.get("client_name")
+        matter_ref  = self.get("matter_ref", "")
+        return_date = self.get("lit_return_date", "[RETURN DATE]")
+        grounds_raw = self.get("lit_grounds", "[GROUNDS TO BE INSERTED]")
+        relief_raw  = self.get("lit_relief_sought", "[RELIEF SOUGHT TO BE INSERTED]")
+        pl_firm     = self.get("plaintiff_solicitor_firm", "[Plaintiff's Solicitors]")
+        pl_addr     = self.get("plaintiff_solicitor_address", "[Address]")
+
+        self._para(doc, "NOTICE OF MOTION", bold=True, size=14,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12, font="Times New Roman")
+
+        self._para(doc,
+            f"TAKE NOTICE that on {return_date} or so soon thereafter as Counsel may be heard, "
+            f"the Defendant/Applicant, {client}, will apply to this Honourable Court for the "
+            f"following relief:",
+            size=11, sp_after=6, font="Times New Roman")
+
+        self._heading(doc, "RELIEF SOUGHT")
+        for item in relief_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        self._heading(doc, "GROUNDS")
+        self._para(doc,
+            "The grounds upon which this application is made are as follows:",
+            size=11, sp_after=4, font="Times New Roman")
+        for item in grounds_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        date = self.get("matter_date", datetime.now().strftime("%d %B %Y"))
+        self._para(doc, f"DATED this {date}", size=11, font="Times New Roman", sp_after=16)
+        self._para(doc, "")
+        self._para(doc, "")
+        self._dwf_address_block(doc, font="Times New Roman")
+        self._para(doc, "")
+        self._para(doc, "TO:", bold=True, size=11, font="Times New Roman")
+        self._para(doc, pl_firm, size=11, font="Times New Roman", sp_after=0)
+        self._para(doc, pl_addr, size=11, font="Times New Roman", sp_after=3)
+        self._para(doc, "Solicitors for the Plaintiff", italic=True, size=11, font="Times New Roman")
+
+        ref = self.get("matter_ref", "motion")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Notice_of_Motion"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 12. NOTICE OF OPPOSITION
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_opposition(self):
+        doc = self._new_doc()
+        self._court_caption(doc, font="Times New Roman")
+
+        plaintiff   = self.get("plaintiff_name")
+        client      = self.get("client_name")
+        matter_ref  = self.get("matter_ref", "")
+        return_date = self.get("lit_return_date", "[RETURN DATE]")
+        grounds_raw = self.get("lit_opposition_grounds",
+                               self.get("lit_grounds", "[GROUNDS OF OPPOSITION TO BE INSERTED]"))
+        pl_firm = self.get("plaintiff_solicitor_firm", "[Plaintiff's Solicitors]")
+        pl_addr = self.get("plaintiff_solicitor_address", "[Address]")
+
+        self._para(doc, "NOTICE OF OPPOSITION", bold=True, size=14,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12, font="Times New Roman")
+
+        self._para(doc,
+            f"TAKE NOTICE that the Plaintiff, {plaintiff}, will, on {return_date} or so soon "
+            f"thereafter as Counsel may be heard, oppose the motion filed herein on the "
+            f"following grounds:",
+            size=11, sp_after=6, font="Times New Roman")
+
+        for item in grounds_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        date = self.get("matter_date", datetime.now().strftime("%d %B %Y"))
+        self._para(doc, f"DATED this {date}", size=11, font="Times New Roman", sp_after=16)
+        self._para(doc, "")
+        self._para(doc, "")
+        self._dwf_address_block(doc, font="Times New Roman")
+        self._para(doc, "")
+        self._para(doc, "TO:", bold=True, size=11, font="Times New Roman")
+        self._para(doc, pl_firm, size=11, font="Times New Roman", sp_after=0)
+        self._para(doc, pl_addr, size=11, font="Times New Roman", sp_after=3)
+        self._para(doc, "Solicitors for the Plaintiff", italic=True, size=11, font="Times New Roman")
+
+        ref = self.get("matter_ref", "opp")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Notice_of_Opposition"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 13. REPLY
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_reply(self):
+        doc = self._new_doc()
+        self._court_caption(doc, font="Times New Roman")
+
+        plaintiff  = self.get("plaintiff_name")
+        client     = self.get("client_name")
+        matter_ref = self.get("matter_ref", "")
+        reply_raw  = self.get("lit_reply_grounds",
+                              self.get("lit_grounds", "[REPLY CONTENT TO BE INSERTED]"))
+        pl_firm    = self.get("plaintiff_solicitor_firm", "[Plaintiff's Solicitors]")
+        pl_addr    = self.get("plaintiff_solicitor_address", "[Address]")
+
+        self._para(doc, "REPLY", bold=True, size=14,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12, font="Times New Roman")
+
+        self._para(doc,
+            f"The Defendant/Respondent, {client}, by its Solicitors, DWF (Ireland) LLP, "
+            f"replies to the Plaintiff's Opposition as follows:",
+            size=11, sp_after=6, font="Times New Roman")
+
+        for item in reply_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        date = self.get("matter_date", datetime.now().strftime("%d %B %Y"))
+        self._para(doc, f"DATED this {date}", size=11, font="Times New Roman", sp_after=16)
+        self._para(doc, "")
+        self._para(doc, "")
+        self._dwf_address_block(doc, font="Times New Roman")
+        self._para(doc, "")
+        self._para(doc, "TO:", bold=True, size=11, font="Times New Roman")
+        self._para(doc, pl_firm, size=11, font="Times New Roman", sp_after=0)
+        self._para(doc, pl_addr, size=11, font="Times New Roman", sp_after=3)
+        self._para(doc, "Solicitors for the Plaintiff", italic=True, size=11, font="Times New Roman")
+
+        ref = self.get("matter_ref", "reply")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Reply"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 14. MEDIATION BRIEF / POSITION PAPER
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_mediation_brief(self):
+        doc = self._new_doc()
+
+        plaintiff      = self.get("plaintiff_name")
+        client         = self.get("client_name")
+        matter_ref     = self.get("matter_ref", "")
+        mediation_date = self.get("lit_mediation_date", "[DATE OF MEDIATION]")
+        mediator       = self.get("lit_mediator_name", "[MEDIATOR NAME]")
+        incident_date  = self.get("incident_date", "[DATE]")
+        record_no      = self.get("record_no", "")
+        date           = self.get("matter_date", datetime.now().strftime("%d %B %Y"))
+
+        self._para(doc, "PRIVILEGED AND WITHOUT PREJUDICE", bold=True, size=11,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, color=(214, 0, 86), sp_after=3)
+        self._para(doc, "MEDIATION POSITION PAPER", bold=True, size=16,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=3)
+        self._para(doc, f"{plaintiff.upper()} -v- {client.upper()}", bold=True, size=12,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=3)
+        if record_no and record_no != "[TBC]":
+            self._para(doc, f"Record No. {record_no}", size=11,
+                       align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=3)
+        self._para(doc, f"Mediation Date: {mediation_date}", size=11,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=3)
+        self._para(doc, f"Mediator: {mediator}", size=11,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12)
+
+        det_tbl = doc.add_table(rows=4, cols=2)
+        self._remove_table_borders(det_tbl)
+        det_tbl.columns[0].width = Cm(5)
+        det_tbl.columns[1].width = Cm(11)
+        for i, (lbl, val) in enumerate([
+            ("Prepared by:", "DWF (Ireland) LLP"),
+            ("On behalf of:", client),
+            ("Date:", date),
+            ("Our Ref:", matter_ref),
+        ]):
+            self._cell_text(det_tbl.rows[i].cells[0], lbl, bold=True, size=10)
+            self._cell_text(det_tbl.rows[i].cells[1], val, size=10)
+        self._para(doc, "")
+
+        self._heading(doc, "1. BACKGROUND", size=12)
+        self._para(doc,
+            self.get("executive_summary",
+                f"This mediation concerns a personal injuries action arising from an incident "
+                f"on {incident_date}. The Plaintiff, {plaintiff}, brings this claim against "
+                f"the Defendant, {client}."),
+            size=11, sp_after=6)
+
+        self._heading(doc, "2. CLIENT'S POSITION", size=12)
+        self._para(doc,
+            self.get("lit_position_statement",
+                self.get("liability_section",
+                    "[INSERT CLIENT'S POSITION ON LIABILITY AND INDEMNITY]")),
+            size=11, sp_after=6)
+
+        self._heading(doc, "3. KEY ISSUES IN DISPUTE", size=12)
+        for item in self.get("lit_key_issues",
+                "Liability\nQuantum\nContributory Negligence\nSpecial Damages").split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Bullet")
+                p.paragraph_format.space_after = Pt(3)
+                r = p.add_run(item)
+                r.font.name = "Calibri"
+                r.font.size = Pt(11)
+
+        self._heading(doc, "4. QUANTUM", size=12)
+        for para in self.get("quantum_section",
+                "[INSERT QUANTUM ANALYSIS — injuries, medical evidence, PIAB award, "
+                "bracket, loss of earnings, special damages]").split("\n\n"):
+            if para.strip():
+                self._para(doc, para.strip(), size=11, sp_after=6)
+
+        self._heading(doc, "5. RESERVE POSITION", size=12)
+        res_tbl = doc.add_table(rows=2, cols=2)
+        self._remove_table_borders(res_tbl)
+        for i, (lbl, val) in enumerate([
+            ("Claim Reserve:", f"€{self.get('reserve_claim', '[AMOUNT]')}"),
+            ("Defence Costs Reserve:", f"€{self.get('reserve_defence_costs', '[AMOUNT]')} + VAT"),
+        ]):
+            self._cell_text(res_tbl.rows[i].cells[0], lbl, bold=True, size=10)
+            self._cell_text(res_tbl.rows[i].cells[1], val, size=10)
+        self._para(doc, "")
+
+        self._heading(doc, "6. SETTLEMENT AUTHORITY", size=12)
+        self._para(doc,
+            self.get("lit_settlement_range",
+                "[TO BE CONFIRMED BY INSURERS PRIOR TO MEDIATION — WITHOUT PREJUDICE]"),
+            size=11, italic=True, sp_after=6)
+
+        self._heading(doc, "7. RECOMMENDATIONS", size=12)
+        for item in self.get("recommendations",
+                "Engage constructively in the mediation process.\n"
+                "Explore possibilities for compromise on quantum.").split("\n"):
+            item = item.strip()
+            if item:
+                self._para(doc, item, size=11, sp_after=3)
+
+        self._para(doc, "")
+        self._para(doc,
+            "This position paper is prepared on a without prejudice and privileged basis "
+            "for the purposes of mediation only and shall not be referred to in any court proceedings.",
+            italic=True, size=9, sp_after=6)
+        self._para(doc, "")
+        self._dwf_sig_block(doc)
+
+        ref = self.get("matter_ref", "med")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Mediation_Brief"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 15. EX PARTE APPLICATION + GROUNDING AFFIDAVIT
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_ex_parte(self):
+        doc = self._new_doc()
+        self._court_caption(doc, font="Times New Roman")
+
+        plaintiff          = self.get("plaintiff_name")
+        client             = self.get("client_name")
+        matter_ref         = self.get("matter_ref", "")
+        deponent           = self.get("lit_deponent_name", self.get("handler_name", "[DEPONENT NAME]"))
+        deponent_capacity  = self.get("lit_deponent_capacity", "Solicitor")
+        grounds_raw        = self.get("lit_ex_parte_grounds",
+                                      self.get("lit_grounds", "[GROUNDS FOR EX PARTE RELIEF]"))
+        relief_raw         = self.get("lit_relief_sought", "[RELIEF SOUGHT]")
+        urgent_reasons     = self.get("lit_urgent_reasons",
+                                      "[STATE REASONS WHY NOTICE CANNOT BE GIVEN TO OTHER SIDE]")
+        date               = self.get("matter_date", datetime.now().strftime("%d %B %Y"))
+
+        # ── PART A: EX PARTE NOTICE ──
+        self._para(doc, "EX PARTE APPLICATION", bold=True, size=14,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12, font="Times New Roman")
+
+        self._para(doc,
+            f"The Defendant/Applicant, {client}, by its Solicitors, DWF (Ireland) LLP, "
+            f"applies ex parte (without notice) to the Plaintiff for the following relief:",
+            size=11, sp_after=6, font="Times New Roman")
+
+        self._heading(doc, "RELIEF SOUGHT", size=12)
+        for item in relief_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        self._heading(doc, "GROUNDS", size=12)
+        for item in grounds_raw.split("\n"):
+            item = item.strip()
+            if item:
+                p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.space_after = Pt(4)
+                r = p.add_run(item)
+                r.font.name = "Times New Roman"
+                r.font.size = Pt(11)
+
+        self._para(doc, "")
+        self._heading(doc, "REASON FOR EX PARTE RELIEF", size=12)
+        self._para(doc, urgent_reasons, size=11, sp_after=6, font="Times New Roman")
+
+        self._para(doc, f"DATED this {date}", size=11, font="Times New Roman", sp_after=16)
+        self._para(doc, "")
+        self._para(doc, "")
+        self._dwf_address_block(doc, font="Times New Roman")
+
+        # ── PART B: GROUNDING AFFIDAVIT ──
+        doc.add_page_break()
+        self._court_caption(doc, font="Times New Roman")
+
+        self._para(doc, "GROUNDING AFFIDAVIT", bold=True, size=14,
+                   align=WD_ALIGN_PARAGRAPH.CENTER, sp_after=12, font="Times New Roman")
+
+        self._para(doc,
+            f"I, {deponent}, {deponent_capacity}, of DWF (Ireland) LLP, The Lennox, "
+            f"50 Richmond Street South, Saint Kevin's, Dublin 2, aged eighteen years and upwards, "
+            f"MAKE OATH and say as follows:",
+            size=11, sp_after=6, font="Times New Roman")
+
+        aff_paras = [
+            f"I am a {deponent_capacity} in the firm of DWF (Ireland) LLP, Solicitors for "
+            f"the Defendant in the above-entitled proceedings and I make this Affidavit from "
+            f"facts within my own knowledge save where otherwise stated and where so stated I "
+            f"believe the same to be true.",
+            f"I make this Affidavit in support of the within ex parte application by the "
+            f"Defendant for the reliefs identified herein.",
+            f"[INSERT SUBSTANTIVE AVERMENTS GROUNDING THE APPLICATION]",
+            f"I crave leave to refer to the papers exhibited herein upon which I will rely.",
+        ]
+        for para in aff_paras:
+            p = doc.add_paragraph(style="List Number")
+            p.paragraph_format.space_after = Pt(6)
+            r = p.add_run(para)
+            r.font.name = "Times New Roman"
+            r.font.size = Pt(11)
+
+        self._para(doc, "")
+        for _ in range(3):
+            self._para(doc, "")
+        self._para(doc, "_" * 45, size=11, font="Times New Roman")
+        self._para(doc, deponent, bold=True, size=11, font="Times New Roman")
+        self._para(doc, "")
+        self._para(doc,
+            f"SWORN by the above-named Deponent at _________________________ "
+            f"on the _____ day of _____________ 20___",
+            size=11, sp_after=12, font="Times New Roman")
+        self._para(doc,
+            "BEFORE ME, a Commissioner for Oaths / Practising Solicitor and I know the Deponent:",
+            size=11, font="Times New Roman", sp_after=12)
+        self._para(doc, "_" * 45, size=11, font="Times New Roman")
+        self._para(doc, "Commissioner for Oaths / Practising Solicitor",
+                   size=11, font="Times New Roman")
+
+        ref = self.get("matter_ref", "expart")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Ex_Parte_Application"))
+
+    # ─────────────────────────────────────────────────────────────
+    # 16. PROFESSIONAL FEE NOTE / BILLING
+    # ─────────────────────────────────────────────────────────────
+
+    def gen_fee_note(self):
+        doc = self._new_doc()
+
+        plaintiff     = self.get("plaintiff_name")
+        client        = self.get("client_name")
+        client_addr   = self.get("client_address", "")
+        matter_ref    = self.get("matter_ref", "")
+        bill_no       = self.get("bill_no",
+                                 f"DWF/{matter_ref.replace('/', '-')}/"
+                                 f"{datetime.now().strftime('%Y%m%d')}")
+        bill_date     = self.get("bill_date", datetime.now().strftime("%d %B %Y"))
+        try:
+            vat_rate = float(self.get("vat_rate", "23").replace("%", "") or 23) / 100
+        except ValueError:
+            vat_rate = 0.23
+        billing_period = self.get("billing_period", "[PERIOD OF SERVICES]")
+        handler        = self.get("handler_name")
+        partner        = self.get("partner_name")
+
+        # ── FIRM HEADER ──
+        p = doc.add_paragraph()
+        p.paragraph_format.space_after = Pt(0)
+        r = p.add_run("DWF (Ireland) LLP")
+        r.bold = True
+        r.font.size = Pt(18)
+        r.font.name = "Calibri"
+        r.font.color.rgb = RGBColor(214, 0, 86)
+
+        self._para(doc, "The Lennox, 50 Richmond Street South, Saint Kevin's, Dublin 2",
+                   size=10, sp_after=0)
+        self._para(doc, "Tel: +353 1 790 9400  |  dwf.law  |  VAT Reg: IE [VAT NO]",
+                   size=10, sp_after=8)
+        doc.add_paragraph("─" * 100).paragraph_format.space_after = Pt(8)
+
+        # ── BILL HEADER TABLE ──
+        hdr = doc.add_table(rows=1, cols=2)
+        self._remove_table_borders(hdr)
+        hdr.columns[0].width = Cm(10)
+        hdr.columns[1].width = Cm(6)
+
+        lc = hdr.rows[0].cells[0]
+        lc.paragraphs[0].clear()
+        lp = lc.paragraphs[0]
+        b = lp.add_run("To:\n")
+        b.bold = True; b.font.size = Pt(10); b.font.name = "Calibri"
+        b2 = lp.add_run("\n".join(filter(None, [client, client_addr])))
+        b2.font.size = Pt(10); b2.font.name = "Calibri"
+
+        rc = hdr.rows[0].cells[1]
+        rc.paragraphs[0].clear()
+        rp = rc.paragraphs[0]
+        rp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        for j, line in enumerate([
+            "PROFESSIONAL FEE NOTE",
+            f"Bill No: {bill_no}",
+            f"Date: {bill_date}",
+            f"Our Ref: {matter_ref}",
+        ]):
+            r2 = rp.add_run(line + ("\n" if j < 3 else ""))
+            r2.font.size = Pt(10 if j > 0 else 13)
+            r2.font.name = "Calibri"
+            r2.bold = (j == 0)
+            if j == 0:
+                r2.font.color.rgb = RGBColor(214, 0, 86)
+
+        self._para(doc, "")
+        self._para(doc, f"Re: {plaintiff} -v- {client}", bold=True, size=11, sp_after=3)
+        self._para(doc, f"Matter Reference: {matter_ref}", size=10, sp_after=3)
+        self._para(doc, f"Period of Services: {billing_period}", size=10, sp_after=8)
+
+        # ── TIME CHARGES TABLE ──
+        self._heading(doc, "PROFESSIONAL CHARGES — TIME RECORDED", size=11)
+        te_tbl = doc.add_table(rows=1, cols=6)
+        te_tbl.style = "Table Grid"
+        for ci, h in enumerate(["Date", "Fee Earner", "Description of Work",
+                                 "Hours", "Rate (€)", "Amount (€)"]):
+            self._cell_text(te_tbl.rows[0].cells[ci], h, bold=True, size=9,
+                            align=WD_ALIGN_PARAGRAPH.CENTER)
+            self._cell_bg(te_tbl.rows[0].cells[ci], "222E40")
+            for run in te_tbl.rows[0].cells[ci].paragraphs[0].runs:
+                run.font.color.rgb = RGBColor(255, 255, 255)
+
+        for ci, w in enumerate([Cm(2), Cm(3.2), Cm(7), Cm(1.5), Cm(2), Cm(2)]):
+            for row in te_tbl.rows:
+                row.cells[ci].width = w
+
+        total_fees = 0.0
+        has_entries = False
+        for n in range(20):
+            earner    = self.data.get(f"te_earner_{n}", "").strip()
+            hours_str = self.data.get(f"te_hours_{n}", "").strip()
+            rate_str  = self.data.get(f"te_rate_{n}", "").strip()
+            desc      = self.data.get(f"te_desc_{n}", "").strip()
+            te_date   = self.data.get(f"te_date_{n}", "").strip()
+            if not earner and not hours_str:
+                continue
+            try:
+                hours  = float(hours_str or 0)
+                rate   = float(rate_str or 0)
+                amount = hours * rate
+            except ValueError:
+                hours = rate = amount = 0.0
+            total_fees += amount
+            has_entries = True
+            row = te_tbl.add_row()
+            self._cell_text(row.cells[0], te_date, size=9)
+            self._cell_text(row.cells[1], earner, size=9)
+            self._cell_text(row.cells[2], desc, size=9)
+            self._cell_text(row.cells[3], f"{hours:.1f}", size=9,
+                            align=WD_ALIGN_PARAGRAPH.CENTER)
+            self._cell_text(row.cells[4], f"€{rate:,.2f}", size=9,
+                            align=WD_ALIGN_PARAGRAPH.RIGHT)
+            self._cell_text(row.cells[5], f"€{amount:,.2f}", size=9,
+                            align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        if not has_entries:
+            row = te_tbl.add_row()
+            self._cell_text(row.cells[0], "[Date]", size=9)
+            self._cell_text(row.cells[1], "[Fee Earner]", size=9)
+            self._cell_text(row.cells[2], "[Description of work performed]", size=9)
+            self._cell_text(row.cells[3], "—", size=9, align=WD_ALIGN_PARAGRAPH.CENTER)
+            self._cell_text(row.cells[4], "€0.00", size=9, align=WD_ALIGN_PARAGRAPH.RIGHT)
+            self._cell_text(row.cells[5], "€0.00", size=9, align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        sub_row = te_tbl.add_row()
+        for cell in sub_row.cells:
+            self._cell_bg(cell, "F0ECE7")
+        self._cell_text(sub_row.cells[2], "SUB-TOTAL — Professional Charges",
+                        bold=True, size=9)
+        self._cell_text(sub_row.cells[5], f"€{total_fees:,.2f}", bold=True, size=9,
+                        align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        self._para(doc, "")
+
+        # ── DISBURSEMENTS TABLE ──
+        self._heading(doc, "DISBURSEMENTS", size=11)
+        disb_tbl = doc.add_table(rows=1, cols=3)
+        disb_tbl.style = "Table Grid"
+        for ci, h in enumerate(["Date", "Description", "Amount (€)"]):
+            self._cell_text(disb_tbl.rows[0].cells[ci], h, bold=True, size=9,
+                            align=WD_ALIGN_PARAGRAPH.CENTER)
+            self._cell_bg(disb_tbl.rows[0].cells[ci], "222E40")
+            for run in disb_tbl.rows[0].cells[ci].paragraphs[0].runs:
+                run.font.color.rgb = RGBColor(255, 255, 255)
+
+        total_disb = 0.0
+        has_disb   = False
+        for n in range(10):
+            disb_desc   = self.data.get(f"disb_desc_{n}", "").strip()
+            disb_amt_s  = self.data.get(f"disb_amount_{n}", "").strip()
+            disb_date   = self.data.get(f"disb_date_{n}", "").strip()
+            if not disb_desc and not disb_amt_s:
+                continue
+            try:
+                disb_amount = float(disb_amt_s.replace("€", "").replace(",", "") or 0)
+            except ValueError:
+                disb_amount = 0.0
+            total_disb += disb_amount
+            has_disb = True
+            row = disb_tbl.add_row()
+            self._cell_text(row.cells[0], disb_date, size=9)
+            self._cell_text(row.cells[1], disb_desc, size=9)
+            self._cell_text(row.cells[2], f"€{disb_amount:,.2f}", size=9,
+                            align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        if not has_disb:
+            row = disb_tbl.add_row()
+            self._cell_text(row.cells[1], "NIL", size=9)
+            self._cell_text(row.cells[2], "€0.00", size=9, align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        d_sub = disb_tbl.add_row()
+        for cell in d_sub.cells:
+            self._cell_bg(cell, "F0ECE7")
+        self._cell_text(d_sub.cells[1], "SUB-TOTAL — Disbursements", bold=True, size=9)
+        self._cell_text(d_sub.cells[2], f"€{total_disb:,.2f}", bold=True, size=9,
+                        align=WD_ALIGN_PARAGRAPH.RIGHT)
+
+        self._para(doc, "")
+
+        # ── TOTALS ──
+        vat_amount  = total_fees * vat_rate
+        grand_total = total_fees + vat_amount + total_disb
+
+        totals_tbl = doc.add_table(rows=4, cols=2)
+        self._remove_table_borders(totals_tbl)
+        totals_tbl.columns[0].width = Cm(12)
+        totals_tbl.columns[1].width = Cm(4)
+        for i, (lbl, val) in enumerate([
+            ("Professional Charges:", f"€{total_fees:,.2f}"),
+            (f"VAT @ {int(vat_rate * 100)}% on Professional Charges:", f"€{vat_amount:,.2f}"),
+            ("Disbursements (VAT exclusive):", f"€{total_disb:,.2f}"),
+            ("TOTAL NOW DUE:", f"€{grand_total:,.2f}"),
+        ]):
+            is_total = (i == 3)
+            self._cell_text(totals_tbl.rows[i].cells[0], lbl, bold=is_total, size=10,
+                            align=WD_ALIGN_PARAGRAPH.RIGHT)
+            self._cell_text(totals_tbl.rows[i].cells[1], val, bold=is_total, size=10,
+                            align=WD_ALIGN_PARAGRAPH.RIGHT)
+            if is_total:
+                for cell in totals_tbl.rows[i].cells:
+                    self._cell_bg(cell, "222E40")
+                    for run in cell.paragraphs[0].runs:
+                        run.font.color.rgb = RGBColor(255, 255, 255)
+
+        self._para(doc, "")
+        self._para(doc,
+            "Payment is due within 30 days of the date of this fee note. "
+            "Please quote the bill number and matter reference when making payment.",
+            size=9, italic=True, sp_after=4)
+        self._para(doc,
+            "DWF (Ireland) LLP is a limited liability partnership registered in Ireland. "
+            "Authorised by the Law Society of Ireland.",
+            size=8, italic=True, sp_after=8)
+        self._para(doc, "Authorised by:", size=10, sp_after=0)
+        for _ in range(3):
+            self._para(doc, "")
+        self._para(doc, "_" * 35, size=10, sp_after=0)
+        self._para(doc, partner if (partner and partner != "[TBC]") else handler,
+                   bold=True, size=10, sp_after=0)
+        self._para(doc, "Partner, DWF (Ireland) LLP", size=10)
+
+        ref = self.get("matter_ref", "bill")
+        return self._save(doc, self._safe_filename(ref, plaintiff, "Fee_Note"))
