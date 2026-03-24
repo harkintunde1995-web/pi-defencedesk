@@ -123,7 +123,7 @@
           <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Branding</h3>
           <a class="nav-item" href="#sec-branding" onclick="return scrollTo('sec-branding')">
             <span class="material-symbols-outlined text-[16px]">photo_library</span>
-            <span>Letterhead &amp; Footer</span>
+            <span>Page Spacing</span>
           </a>
         </div>
         <!-- DOCUMENTS -->
@@ -708,25 +708,38 @@
         </div>
       </div>
 
-      <!-- ─── LETTERHEAD & FOOTER ─── -->
+      <!-- ─── PAGE SPACING ─── -->
       <div class="section-card" id="sec-branding">
         <div class="section-header" onclick="toggleSection(this)">
           <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">photo_library</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Letterhead &amp; Footer</h2>
-            <span class="text-[10px] text-slate-400 font-normal ml-1">— Document branding</span>
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">vertical_distribute</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Page Spacing</h2>
+            <span class="text-[10px] text-slate-400 font-normal ml-1">— Header &amp; footer margin for pre-printed letterhead</span>
           </div>
           <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-4 hidden">
+          <p class="text-xs text-slate-400 mb-4">Set the top and bottom margins (in cm) to leave space for your firm's pre-printed letterhead and footer. Default is 2.5 cm.</p>
           <div class="grid grid-cols-12 gap-5">
-            <div class="col-span-6 space-y-1">
-              <label class="dwf-label">Letterhead</label>
-              <input name="letterhead_text" class="dwf-input" placeholder="e.g. Your Firm Name — Address Line, Dublin 1"/>
+            <div class="col-span-6 space-y-2">
+              <label class="dwf-label">Header Space (cm) <span class="font-normal text-slate-400">— top margin</span></label>
+              <div class="flex items-center gap-3">
+                <input type="range" name="header_space" min="1" max="8" step="0.5" value="2.5"
+                  class="flex-1 accent-dwf-pink" id="headerRange"
+                  oninput="document.getElementById('headerVal').textContent=this.value"/>
+                <span id="headerVal" class="text-sm font-bold text-dwf-pink w-10 text-right">2.5</span>
+                <span class="text-xs text-slate-400">cm</span>
+              </div>
             </div>
-            <div class="col-span-6 space-y-1">
-              <label class="dwf-label">Footer</label>
-              <input name="footer_text" class="dwf-input" placeholder="e.g. Authorised by the Law Society of Ireland · dwf.law"/>
+            <div class="col-span-6 space-y-2">
+              <label class="dwf-label">Footer Space (cm) <span class="font-normal text-slate-400">— bottom margin</span></label>
+              <div class="flex items-center gap-3">
+                <input type="range" name="footer_space" min="1" max="8" step="0.5" value="2.5"
+                  class="flex-1 accent-dwf-pink" id="footerRange"
+                  oninput="document.getElementById('footerVal').textContent=this.value"/>
+                <span id="footerVal" class="text-sm font-bold text-dwf-pink w-10 text-right">2.5</span>
+                <span class="text-xs text-slate-400">cm</span>
+              </div>
             </div>
           </div>
         </div>

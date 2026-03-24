@@ -48,11 +48,19 @@ class DocumentGenerator:
 
     def _new_doc(self):
         doc = Document()
+        try:
+            top = Cm(float(self.data.get("header_space") or 2.5))
+        except (ValueError, TypeError):
+            top = Cm(2.5)
+        try:
+            bottom = Cm(float(self.data.get("footer_space") or 2.5))
+        except (ValueError, TypeError):
+            bottom = Cm(2.5)
         for section in doc.sections:
-            section.top_margin = Cm(2.5)
-            section.bottom_margin = Cm(2.5)
-            section.left_margin = Cm(2.5)
-            section.right_margin = Cm(2.5)
+            section.top_margin    = top
+            section.bottom_margin = bottom
+            section.left_margin   = Cm(2.5)
+            section.right_margin  = Cm(2.5)
         return doc
 
     def _para(self, doc, text="", bold=False, italic=False, size=11,
