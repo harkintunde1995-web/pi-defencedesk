@@ -1,0 +1,289 @@
+/* ═══════════════════════════════════════════════
+   DWF Ireland — Document Generator
+   Styles
+═══════════════════════════════════════════════ */
+
+:root {
+  --dwf-dark:    #222e40;   /* deep nav / sidebar */
+  --dwf-navy:    #2b3a50;   /* dark sections, secondary btn */
+  --dwf-pink:    #d60056;   /* DWF primary brand — headings, CTAs */
+  --dwf-pink-h:  #ff0a6d;   /* hover / underline accent */
+  --dwf-cream:   #f0ece7;   /* warm section backgrounds */
+  --dwf-cream2:  #ece6df;   /* card / panel backgrounds */
+  --dwf-text:    #323232;   /* body text */
+  --border:      #ddd8d2;   /* warm border matching cream */
+  --text-muted:  #6b6460;
+  --section-bg:  #ffffff;
+  --panel-bg:    #f0ece7;   /* warm cream right panel */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--dwf-cream);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  color: var(--dwf-text);
+  min-height: 100vh;
+}
+
+/* ─── NAV ─── */
+.dwf-nav {
+  background: var(--dwf-dark) !important;
+  height: 56px;
+  border-bottom: 3px solid var(--dwf-pink);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.dwf-logo-mark {
+  background: var(--dwf-pink);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* ─── LAYOUT ─── */
+.form-panel {
+  min-height: calc(100vh - 56px);
+  padding-bottom: 60px;
+}
+
+.right-panel {
+  background: var(--dwf-cream2);
+  border-left: 1px solid var(--border);
+  min-height: calc(100vh - 56px);
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+
+/* ─── SECTION CARDS ─── */
+.section-card {
+  background: var(--section-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(34,46,64,.07);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dwf-navy);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  transition: background 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.section-header:hover {
+  background: var(--dwf-cream);
+}
+
+.section-header i.bi-briefcase-fill,
+.section-header i.bi-person-fill,
+.section-header i.bi-building,
+.section-header i.bi-bank2,
+.section-header i.bi-people-fill,
+.section-header i.bi-cash-coin,
+.section-header i.bi-exclamation-triangle-fill,
+.section-header i.bi-file-earmark-text-fill,
+.section-header i.bi-folder2-open,
+.section-header i.bi-envelope-fill,
+.section-header i.bi-list-ol {
+  color: var(--dwf-pink);
+  font-size: 15px;
+}
+
+.toggle-icon {
+  transition: transform 0.2s;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.section-header[aria-expanded="false"] .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.section-body {
+  padding: 20px 18px;
+}
+
+/* ─── FORM CONTROLS ─── */
+.form-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 5px;
+}
+
+.form-control, .form-select {
+  font-size: 13.5px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 7px 11px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--dwf-pink);
+  box-shadow: 0 0 0 3px rgba(214, 0, 86, 0.1);
+  outline: none;
+}
+
+textarea.form-control {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.font-mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12.5px;
+}
+
+.req {
+  color: #ef4444;
+}
+
+.hint {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 11.5px;
+}
+
+/* ─── RIGHT PANEL DOCS ─── */
+.doc-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-check-item {
+  display: flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #374151;
+  transition: background 0.12s;
+  margin-bottom: 2px;
+  user-select: none;
+}
+
+.doc-check-item:hover {
+  background: var(--dwf-cream);
+}
+
+.doc-check-item input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: var(--dwf-pink);
+  flex-shrink: 0;
+}
+
+/* ─── GENERATE BUTTON ─── */
+.btn-generate {
+  background: var(--dwf-pink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: none;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 13px;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(214, 0, 86, 0.3);
+}
+
+.btn-generate:hover {
+  background: var(--dwf-pink-h);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 10, 109, 0.4);
+}
+
+.btn-generate:active {
+  transform: translateY(0);
+}
+
+.btn-generate:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── TIPS BOX ─── */
+.quick-tips {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--dwf-pink);
+  border-radius: 4px;
+  padding: 14px;
+}
+
+.tips-title {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--dwf-pink);
+  margin-bottom: 8px;
+}
+
+.quick-tips ul {
+  color: var(--dwf-text);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.quick-tips code {
+  background: var(--dwf-cream);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--dwf-navy);
+}
+
+/* ─── SELECT ALL / CLEAR ─── */
+.btn-outline-secondary {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-color: #d1d5db;
+  color: #374151;
+  border-radius: 5px;
+}
+
+.btn-outline-secondary:hover {
+  background: #e5e7eb;
+  color: #111;
+  border-color: #9ca3af;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 991px) {
+  .right-panel {
+    position: static;
+    height: auto;
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}

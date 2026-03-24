@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Document Generator | DWF (Ireland) LLP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "dwf-dark":  "#222e40",
+          "dwf-navy":  "#2b3a50",
+          "dwf-pink":  "#d60056",
+          "dwf-pink2": "#ff0a6d",
+          "dwf-cream": "#f0ece7",
+          "dwf-cream2":"#ece6df",
+          "dwf-text":  "#323232",
+          "dwf-border":"#ddd8d2",
+        },
+        fontFamily: { sans: ["Inter","sans-serif"] },
+        borderRadius: { DEFAULT:"0.125rem", lg:"0.25rem", xl:"0.5rem" },
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family:'Inter',sans-serif; background:#f0ece7; color:#323232; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; user-select:none; }
+  ::-webkit-scrollbar { width:5px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:#ddd8d2; border-radius:10px; }
+  .dwf-input { @apply w-full bg-white border-b-2 border-slate-200 focus:border-dwf-pink focus:ring-0 transition-all py-2 px-1 text-sm outline-none; }
+  .dwf-label { @apply block text-[12px] font-bold text-[#323232] mb-1; }
+  .dwf-select { @apply w-full bg-white border-b-2 border-slate-200 focus:border-dwf-pink focus:ring-0 transition-all py-2 px-1 text-sm outline-none; }
+  .section-card { @apply bg-white rounded overflow-hidden mb-5; box-shadow: 0 12px 32px -4px rgba(50,50,50,0.08); }
+  .section-header { @apply px-5 py-4 flex items-center justify-between cursor-pointer hover:bg-dwf-cream transition-colors; }
+  .pink-accent { accent-color:#d60056; }
+  .nav-item { @apply flex items-center py-2.5 px-4 transition-all cursor-pointer text-xs; }
+  input[type=checkbox].pink-accent { accent-color:#d60056; width:14px; height:14px; }
+  textarea.mono { font-family:'SFMono-Regular',Consolas,monospace; font-size:12px; background:#faf8f5; }
+</style>
+</head>
+<body class="overflow-hidden h-screen flex flex-col">
+
+<!-- ═══ TOP NAV ═══ -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center px-6 justify-between bg-dwf-dark h-[56px] border-b-[3px] border-dwf-pink">
+  <div class="flex items-center">
+    <div class="bg-dwf-pink text-white px-3 py-1 font-black text-[15px] mr-3 tracking-tight">DWF</div>
+    <span class="text-white font-semibold text-sm">Document Generator</span>
+    <span class="text-slate-500 text-xs ml-3 hidden md:inline">DWF (Ireland) LLP</span>
+  </div>
+  <div class="flex items-center space-x-3">
+    <span class="text-slate-500 text-[11px] hidden md:inline">Personal Injury · Insurance Defence</span>
+    <button class="text-slate-400 hover:bg-white/10 p-1.5 rounded-full transition-all">
+      <span class="material-symbols-outlined text-[20px]">help_outline</span>
+    </button>
+    <button class="text-slate-400 hover:bg-white/10 p-1.5 rounded-full transition-all">
+      <span class="material-symbols-outlined text-[22px]">account_circle</span>
+    </button>
+  </div>
+</header>
+
+<form id="mainForm" method="POST" action="/generate">
+<div class="flex flex-1 pt-[56px] overflow-hidden h-screen">
+
+  <!-- ═══ LEFT SIDEBAR ═══ -->
+  <aside class="flex flex-col h-full bg-dwf-dark w-[220px] shrink-0 border-r border-white/10">
+    <div class="p-5 pb-2">
+      <div class="text-white font-bold tracking-widest uppercase text-[10px] opacity-50 mb-0.5">DWF Legal Folio</div>
+      <div class="text-dwf-pink text-[9px] font-bold uppercase tracking-wider mb-5">Document Automation</div>
+
+      <nav class="flex-1 py-2" id="sideNav">
+        <!-- MATTER -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Matter</h3>
+          <a class="nav-item active" href="#sec-matter" onclick="return scrollTo('sec-matter')">
+            <span class="material-symbols-outlined text-[16px]">folder_open</span>
+            <span>Matter Details</span>
+          </a>
+        </div>
+        <!-- PARTIES -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Parties</h3>
+          <a class="nav-item" href="#sec-plaintiff" onclick="return scrollTo('sec-plaintiff')">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>Plaintiff</span>
+          </a>
+          <a class="nav-item" href="#sec-client" onclick="return scrollTo('sec-client')">
+            <span class="material-symbols-outlined text-[16px]">business</span>
+            <span>Defendant / Insured</span>
+          </a>
+          <a class="nav-item" href="#sec-personnel" onclick="return scrollTo('sec-personnel')">
+            <span class="material-symbols-outlined text-[16px]">group</span>
+            <span>DWF Personnel</span>
+          </a>
+        </div>
+        <!-- PROCEEDINGS -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Proceedings</h3>
+          <a class="nav-item" href="#sec-court" onclick="return scrollTo('sec-court')">
+            <span class="material-symbols-outlined text-[16px]">gavel</span>
+            <span>Court &amp; Proceedings</span>
+          </a>
+          <a class="nav-item" href="#sec-incident" onclick="return scrollTo('sec-incident')">
+            <span class="material-symbols-outlined text-[16px]">warning</span>
+            <span>Incident</span>
+          </a>
+        </div>
+        <!-- FINANCIALS -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Financials</h3>
+          <a class="nav-item" href="#sec-fees" onclick="return scrollTo('sec-fees')">
+            <span class="material-symbols-outlined text-[16px]">payments</span>
+            <span>Fee Schedule</span>
+          </a>
+        </div>
+        <!-- BRANDING -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Branding</h3>
+          <a class="nav-item" href="#sec-branding" onclick="return scrollTo('sec-branding')">
+            <span class="material-symbols-outlined text-[16px]">photo_library</span>
+            <span>Letterhead &amp; Footer</span>
+          </a>
+        </div>
+        <!-- DOCUMENTS -->
+        <div class="mb-5">
+          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Documents</h3>
+          <a class="nav-item" href="#sec-report" onclick="return scrollTo('sec-report')">
+            <span class="material-symbols-outlined text-[16px]">description</span>
+            <span>Prelim Report</span>
+          </a>
+          <a class="nav-item" href="#sec-brief" onclick="return scrollTo('sec-brief')">
+            <span class="material-symbols-outlined text-[16px]">menu_book</span>
+            <span>Brief / Index</span>
+          </a>
+          <a class="nav-item" href="#sec-letter" onclick="return scrollTo('sec-letter')">
+            <span class="material-symbols-outlined text-[16px]">mail</span>
+            <span>Standard Letter</span>
+          </a>
+          <a class="nav-item" href="#sec-nfp" onclick="return scrollTo('sec-nfp')">
+            <span class="material-symbols-outlined text-[16px]">format_list_numbered</span>
+            <span>Extra Particulars</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="mt-auto p-4 bg-[#1a2332]/50 border-t border-white/10">
+      <div class="text-center mb-3">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500" id="selectedCount">0 of 10 selected</span>
+      </div>
+      <button type="submit" id="sidebarGenBtn"
+        class="w-full bg-dwf-pink text-white text-[10px] font-extrabold tracking-widest py-3.5 rounded hover:bg-dwf-pink2 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(214,0,86,0.35)]">
+        <span class="material-symbols-outlined text-[14px]">download</span>
+        GENERATE &amp; DOWNLOAD
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN FORM ═══ -->
+  <main class="flex-1 bg-dwf-cream overflow-y-auto px-8 py-6" id="mainScroll">
+    <div class="max-w-3xl mx-auto space-y-5">
+
+      <!-- Page header -->
+      <div class="flex items-baseline justify-between mb-2">
+        <div>
+          <h1 class="text-xl font-bold text-[#1c1c19] tracking-tight">New Matter</h1>
+          <p class="text-xs text-slate-500 mt-0.5">Fill in the sections below then select documents to generate on the right.</p>
+        </div>
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-dwf-pink"></span>
+          Personal Injury / Insurance Defence
+        </div>
+      </div>
+
+      <!-- ─── MATTER DETAILS ─── -->
+      <div class="section-card" id="sec-matter">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">folder_open</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Matter Details</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">DWF Reference <span class="text-dwf-pink">*</span></label>
+            <input name="matter_ref" class="dwf-input" placeholder="e.g. 2034157-102" required/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Document Date <span class="text-dwf-pink">*</span></label>
+            <input name="matter_date" class="dwf-input" value="{{ today }}" required/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Report Date (if different)</label>
+            <input name="report_date" class="dwf-input" placeholder="Leave blank to use above"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Insurer (short) <span class="text-dwf-pink">*</span></label>
+            <input name="insurer_name" class="dwf-input" placeholder="e.g. QBE" required/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="dwf-label">Insurer Full Name</label>
+            <input name="insurer_name_full" class="dwf-input" placeholder="e.g. QBE Insurance (Europe) Limited"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Policy Number</label>
+            <input name="policy_no" class="dwf-input" placeholder="Policy number"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Policy Period — From</label>
+            <input name="policy_period_from" class="dwf-input" placeholder="e.g. 01 January 2024"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Policy Period — To</label>
+            <input name="policy_period_to" class="dwf-input" placeholder="e.g. 31 December 2024"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Policy Type</label>
+            <select name="policy_type" class="dwf-select">
+              <option value="">— Select —</option>
+              <option>Employer Liability</option>
+              <option>Public Liability</option>
+              <option>Road Traffic Accident</option>
+              <option>Medical Negligence</option>
+              <option>Product Liability</option>
+              <option>Defamation</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Policy Excess (€)</label>
+            <input name="policy_excess" class="dwf-input" placeholder="e.g. 10000"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Insurer's Reference</label>
+            <input name="insurer_ref" class="dwf-input" placeholder="e.g. QB/22/11361"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Insurer Address</label>
+            <input name="insurer_address" class="dwf-input" placeholder="Insurer's full address"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Company Ref (Internal)</label>
+            <input name="company_ref" class="dwf-input" placeholder="e.g. TBC"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PLAINTIFF ─── -->
+      <div class="section-card" id="sec-plaintiff">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">person</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Plaintiff Details</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Plaintiff Full Name <span class="text-dwf-pink">*</span></label>
+            <input name="plaintiff_name" class="dwf-input" placeholder="e.g. Jonathan Waters" required/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Date of Birth</label>
+            <input name="plaintiff_dob" class="dwf-input" placeholder="DD/MM/YYYY"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Gender</label>
+            <select name="plaintiff_gender" class="dwf-select">
+              <option value="">— Select —</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">PPS Number</label>
+            <input name="plaintiff_pps" class="dwf-input" placeholder="For RBA form"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="dwf-label">Plaintiff Address</label>
+            <input name="plaintiff_address" class="dwf-input" placeholder="Full address"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Plaintiff's Solicitors Firm</label>
+            <input name="plaintiff_solicitor_firm" class="dwf-input" placeholder="e.g. Smith & Jones Solicitors"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Plaintiff's Solicitors Address</label>
+            <input name="plaintiff_solicitor_address" class="dwf-input" placeholder="Address of plaintiff's solicitors"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── DEFENDANT / CLIENT ─── -->
+      <div class="section-card" id="sec-client">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">business</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Defendant / Insured Client</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Insured / Defendant Name <span class="text-dwf-pink">*</span></label>
+            <input name="client_name" class="dwf-input" placeholder="e.g. Glen Aris Unlimited Company" required/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Client Address</label>
+            <input name="client_address" class="dwf-input" placeholder="Full address"/>
+          </div>
+          <div class="col-span-7 space-y-1">
+            <label class="dwf-label">Additional Defendants</label>
+            <input name="additional_defendants" class="dwf-input" placeholder="e.g. AND SECOND NAMED DEFENDANT LIMITED"/>
+          </div>
+          <div class="col-span-5 space-y-1">
+            <label class="dwf-label">Defended Party Description</label>
+            <input name="defended_party" class="dwf-input" value="First Named Defendant"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── COURT ─── -->
+      <div class="section-card" id="sec-court">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">gavel</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Court &amp; Proceedings</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Court / Forum <span class="text-dwf-pink">*</span></label>
+            <select name="court_type" class="dwf-select" id="courtSelect" required>
+              <option value="">— Select —</option>
+              <option value="High Court">High Court</option>
+              <option value="Circuit Court">Circuit Court</option>
+              <option value="District Court">District Court</option>
+              <option value="Workplace Relations Commission (WRC)">WRC</option>
+            </select>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Record Number</label>
+            <input name="record_no" class="dwf-input" placeholder="e.g. 2023/531P"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Brief Type</label>
+            <select name="brief_type" class="dwf-select">
+              <option value="Brief to Counsel">Brief to Counsel</option>
+              <option value="Brief for Engineer">Brief for Engineer</option>
+              <option value="Brief for Medical Expert">Brief for Medical Expert</option>
+              <option value="Brief for Mediation">Brief for Mediation</option>
+            </select>
+          </div>
+          <div class="col-span-4 space-y-1 wrc-field hidden">
+            <label class="dwf-label">WRC ADJ Number</label>
+            <input name="adj_no" class="dwf-input" placeholder="e.g. 00045566"/>
+          </div>
+          <div class="col-span-4 space-y-1 wrc-field hidden">
+            <label class="dwf-label">WRC CA Number</label>
+            <input name="ca_no" class="dwf-input" placeholder="e.g. 00056309"/>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Proceedings Issued</label>
+            <input name="proceedings_issued" class="dwf-input" placeholder="e.g. Circuit Court Personal Injuries Summons issued"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── DWF PERSONNEL ─── -->
+      <div class="section-card" id="sec-personnel">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">group</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">DWF Personnel</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Supervising Partner</label>
+            <input name="partner_name" class="dwf-input" placeholder="e.g. Lorna McAuliffe"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Partner Email</label>
+            <input name="partner_email" class="dwf-input" placeholder="partner@dwf.law"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Phone</label>
+            <input name="handler_phone" class="dwf-input" value="01 790 9400"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Case Handler <span class="text-dwf-pink">*</span></label>
+            <input name="handler_name" class="dwf-input" placeholder="e.g. Roryann Sweeney" required/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Handler Email <span class="text-dwf-pink">*</span></label>
+            <input name="handler_email" class="dwf-input" placeholder="handler@dwf.law" required/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Handler Title</label>
+            <select name="handler_title" class="dwf-select">
+              <option>Solicitor</option>
+              <option>Senior Associate</option>
+              <option>Associate</option>
+              <option>Paralegal</option>
+              <option>Partner</option>
+            </select>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Complaints Partner</label>
+            <input name="complaints_partner" class="dwf-input" value="Chris Wheeler"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Complaints Phone</label>
+            <input name="complaints_phone" class="dwf-input" value="01 790 9400"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Complaints Email</label>
+            <input name="complaints_email" class="dwf-input" value="Chris.Wheeler2@dwf.law"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── FEE SCHEDULE ─── -->
+      <div class="section-card" id="sec-fees">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">payments</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Fee Schedule</h2>
+            <span class="text-[10px] text-slate-400 font-normal ml-1">— for LOE Hourly</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
+          <div class="col-span-12">
+            <p class="text-xs text-slate-400 mb-3">Leave blank to use DWF defaults (Partner €300, Associate €250, Paralegal €150, VAT 23%)</p>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Partner (€/hr)</label>
+            <input name="rate_partner" class="dwf-input" placeholder="300"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Senior Associate (€/hr)</label>
+            <input name="rate_senior_associate" class="dwf-input" placeholder="250"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Associate (€/hr)</label>
+            <input name="rate_associate" class="dwf-input" placeholder="250"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Solicitor (€/hr)</label>
+            <input name="rate_solicitor" class="dwf-input" placeholder="250"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Paralegal (€/hr)</label>
+            <input name="rate_paralegal" class="dwf-input" placeholder="150"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">VAT Rate (%)</label>
+            <input name="vat_rate" class="dwf-input" placeholder="23"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Fixed Fee (€)</label>
+            <input name="fixed_fee" class="dwf-input" placeholder="LOE Fixed only"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── INCIDENT ─── -->
+      <div class="section-card" id="sec-incident">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">warning</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Incident Details</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Date of Incident</label>
+            <input name="incident_date" class="dwf-input" placeholder="DD Month YYYY"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Time of Incident</label>
+            <input name="incident_time" class="dwf-input" placeholder="e.g. 11:00"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Date of Notification</label>
+            <input name="date_notification" class="dwf-input" placeholder="e.g. TBC"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Date of Instruction</label>
+            <input name="date_instruction" class="dwf-input" placeholder="Date DWF instructed"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="dwf-label">Incident Location</label>
+            <input name="incident_location" class="dwf-input" placeholder="Address / site of incident"/>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Injuries Description <span class="text-slate-400 font-normal">(RBA — be specific, no "soft tissue injury")</span></label>
+            <input name="injuries_description" class="dwf-input" placeholder="e.g. INJURIES TO LEFT SHOULDER AND NECK REGION"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PRELIMINARY REPORT ─── -->
+      <div class="section-card" id="sec-report">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">description</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Preliminary Report Content</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
+          <div class="col-span-12">
+            <p class="text-xs text-slate-400 mb-1">Blank fields generate as placeholders in the report — fill in as much as available.</p>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Insurer / Loss Adjuster Contact</label>
+            <input name="insurer_contact_name" class="dwf-input" placeholder="e.g. Aine Lavery"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Organisation</label>
+            <input name="insurer_contact_org" class="dwf-input" placeholder="e.g. Sedgwick / QBE / Zurich"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Contact Address</label>
+            <input name="insurer_contact_address" class="dwf-input" placeholder="Address of insurer contact"/>
+          </div>
+          <div class="col-span-6 space-y-1">
+            <label class="dwf-label">Contact Email</label>
+            <input name="insurer_contact_email" class="dwf-input" placeholder="e.g. aine.lavery@ie.sedgwick.com"/>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Executive Summary</label>
+            <textarea name="executive_summary" class="dwf-input" rows="3" placeholder="Brief overview — who is the plaintiff, what happened, what proceedings have issued..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Incident Circumstances</label>
+            <textarea name="incident_circumstances" class="dwf-input" rows="3" placeholder="Detailed description of how the incident occurred..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">PIAB Details</label>
+            <textarea name="piab_details" class="dwf-input" rows="2" placeholder="PIAB Form A/B, authorisation number, date of authorisation..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Procedural Position</label>
+            <textarea name="procedural_position" class="dwf-input" rows="2" placeholder="Appearances entered, correspondence to date, current status..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Liability Analysis</label>
+            <textarea name="liability_section" class="dwf-input" rows="3" placeholder="Alleged breaches, insured's position, contributory negligence, indemnity issues..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Quantum / Injuries</label>
+            <textarea name="quantum_section" class="dwf-input" rows="3" placeholder="Injuries per summons, medical reports, guidelines bracket, loss of earnings..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Recommendations</label>
+            <textarea name="recommendations" class="dwf-input" rows="4" placeholder="One per line, e.g.:&#10;Enter Appearance&#10;Brief Counsel to draft Notice for Particulars&#10;Instruct Engineer at cost of €X plus VAT&#10;Obtain RBA certificate"></textarea>
+          </div>
+          <!-- Reserves -->
+          <div class="col-span-12 pt-2 border-t border-dwf-border">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3">Reserves</p>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">General Damages (€)</label>
+            <input name="reserve_general_damages" class="dwf-input" placeholder="e.g. 20000"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Loss of Earnings (€)</label>
+            <input name="reserve_loss_of_earnings" class="dwf-input" placeholder="e.g. 15000"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Special Damages (€)</label>
+            <input name="reserve_special_damages" class="dwf-input" placeholder="e.g. 5000"/>
+          </div>
+          <div class="col-span-3 space-y-1">
+            <label class="dwf-label">Total Claim Reserve (€)</label>
+            <input name="reserve_claim" class="dwf-input" placeholder="e.g. 40000"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Defence Costs Reserve (€)</label>
+            <input name="reserve_defence_costs" class="dwf-input" placeholder="e.g. 8450"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Claimants' Costs Reserve (€)</label>
+            <input name="reserve_claimants_costs" class="dwf-input" placeholder="e.g. 25000"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Claim Paid</label>
+            <input name="claim_paid" class="dwf-input" value="NIL"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── BRIEF / INDEX ─── -->
+      <div class="section-card" id="sec-brief">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">menu_book</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Brief / Index to Brief Content</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
+          <div class="col-span-12">
+            <div class="bg-dwf-cream border border-dwf-border rounded p-3 text-xs text-slate-500 mb-2">
+              Format each line as: <code class="bg-white px-1 rounded text-dwf-navy font-mono">Document Name | DD.MM.YYYY | Page numbers</code>
+              e.g. <code class="bg-white px-1 rounded text-dwf-navy font-mono">Personal Injuries Summons | 03.09.2020 | 1 - 12</code>
+            </div>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label font-extrabold">Section A — Pleadings</label>
+            <textarea name="section_a_docs" class="dwf-input mono" rows="6"
+              placeholder="Personal Injuries Summons | 03.09.2020 | 1 - 12&#10;Affidavit of Verification | 09.09.2020 | 13&#10;Memorandum of Appearance | 25.11.2020 | 14 - 15&#10;Notice for Particulars | 22.01.2021 | 16 - 19&#10;Replies to Particulars | 18.03.2021 | 20 - 25&#10;Personal Injuries Defence | 20.04.2022 | 26 - 29"></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label font-extrabold">Section B — Documentation / Reports</label>
+            <textarea name="section_b_docs" class="dwf-input mono" rows="4"
+              placeholder="Incident Report | DD.MM.YYYY | 1&#10;Witness Statement | DD.MM.YYYY | 2&#10;Photographs | N/A | 3&#10;Risk Assessment | DD.MM.YYYY | 4 - 8"></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label font-extrabold">Section C — Medical Reports / Records</label>
+            <textarea name="section_c_docs" class="dwf-input mono" rows="3"
+              placeholder="Report of Dr [Name] | DD.MM.YYYY | 1 - 4&#10;Medical Records from [Hospital] | N/A | 5 - 12"></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label font-extrabold">Section D — Interpartes Correspondence</label>
+            <textarea name="section_d_docs" class="dwf-input mono" rows="2"
+              placeholder="Correspondence between DWF and Plaintiff's Solicitors | DD.MM.YYYY – DD.MM.YYYY | 1 - 45"></textarea>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Section E Title (optional)</label>
+            <input name="section_e_title" class="dwf-input" placeholder="e.g. Second Incident"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="dwf-label">Section E Documents</label>
+            <textarea name="section_e_docs" class="dwf-input mono" rows="2" placeholder="Document Name | Date | Pages"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── STANDARD LETTER ─── -->
+      <div class="section-card" id="sec-letter">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">mail</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Standard Letter Details</h2>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Recipient Name</label>
+            <input name="recipient_name" class="dwf-input" placeholder="e.g. John Murphy"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Recipient Firm</label>
+            <input name="recipient_firm" class="dwf-input" placeholder="e.g. Murphy & Co. Solicitors"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Recipient Address</label>
+            <input name="recipient_address" class="dwf-input" placeholder="Full address"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Letter Type / Subject</label>
+            <input name="letter_type" class="dwf-input" placeholder="e.g. Letter to Counsel — Brief"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Salutation</label>
+            <input name="salutation" class="dwf-input" value="Dear Sirs"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="dwf-label">Closing</label>
+            <input name="closing" class="dwf-input" value="Yours sincerely,"/>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="dwf-label">Letter Body</label>
+            <textarea name="letter_body" class="dwf-input" rows="6"
+              placeholder="Type or paste the body of the letter here. Separate paragraphs with a blank line."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── NOTICE FOR PARTICULARS ─── -->
+      <div class="section-card" id="sec-nfp">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">format_list_numbered</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Additional Particulars</h2>
+            <span class="text-[10px] text-slate-400 font-normal ml-1">— Notice for Particulars extra items</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 hidden">
+          <p class="text-xs text-slate-400 mb-3">12 standard particulars are pre-populated. Add any extra case-specific ones below — one per line.</p>
+          <textarea name="custom_particulars" class="dwf-input" rows="4"
+            placeholder="e.g. Whether the Plaintiff received manual handling training prior to the alleged incident and if so, provide full details."></textarea>
+        </div>
+      </div>
+
+      <!-- ─── LETTERHEAD & FOOTER ─── -->
+      <div class="section-card" id="sec-branding">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center space-x-3">
+            <span class="material-symbols-outlined text-dwf-pink text-[18px]">photo_library</span>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Letterhead &amp; Footer</h2>
+            <span class="text-[10px] text-slate-400 font-normal ml-1">— Document branding</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-4 hidden">
+          <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-6 space-y-1">
+              <label class="dwf-label">Letterhead</label>
+              <input name="letterhead_text" class="dwf-input" placeholder="e.g. DWF (Ireland) LLP — One Spencer Dock, Dublin 1"/>
+            </div>
+            <div class="col-span-6 space-y-1">
+              <label class="dwf-label">Footer</label>
+              <input name="footer_text" class="dwf-input" placeholder="e.g. Authorised by the Law Society of Ireland · dwf.law"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-16"></div>
+    </div>
+  </main>
+
+  <!-- ═══ RIGHT PANEL ═══ -->
+  <aside class="w-[300px] bg-dwf-cream2 h-full flex flex-col shrink-0 overflow-y-auto">
+    <div class="p-5 flex-1 space-y-5">
+      <div>
+        <h2 class="text-[16px] font-bold text-[#2b3a50]">Generate Documents</h2>
+        <p class="text-[13px] text-[#6b6460] mt-1">Select documents to include in your bundle.</p>
+      </div>
+
+      <!-- LETTERS OF ENGAGEMENT -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Letters of Engagement</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
+        </div>
+        {% for key, label in [('loe_hourly','LOE — Hourly Rate'),('loe_fixed','LOE — Fixed Fee')] %}
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
+        </label>
+        {% endfor %}
+      </section>
+
+      <!-- REPORTS -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Reports</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">1 item</span>
+        </div>
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="preliminary_report" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">Preliminary Report</span>
+        </label>
+      </section>
+
+      <!-- BRIEFS & INDEXES -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Briefs &amp; Indexes</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
+        </div>
+        {% for key, label in [('brief_cover','Brief Cover Page'),('index_brief','Index to Brief')] %}
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
+        </label>
+        {% endfor %}
+      </section>
+
+      <!-- PLEADINGS -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Pleadings</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">3 items</span>
+        </div>
+        {% for key, label in [('appearance_hc','Appearance — High Court'),('appearance_cc','Appearance — Circuit Court'),('notice_particulars','Notice for Particulars')] %}
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
+        </label>
+        {% endfor %}
+      </section>
+
+      <!-- FORMS & LETTERS -->
+      <section>
+        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
+          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Forms &amp; Letters</h3>
+          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
+        </div>
+        {% for key, label in [('rba_form','RBA Form'),('standard_letter','Standard Letter')] %}
+        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
+          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
+        </label>
+        {% endfor %}
+      </section>
+
+      <!-- Select / Clear -->
+      <div class="flex gap-2">
+        <button type="button" id="selectAll"
+          class="flex-1 py-1.5 border border-dwf-border text-[12px] text-[#5b3f43] font-medium hover:bg-dwf-cream transition-all rounded">
+          Select All
+        </button>
+        <button type="button" id="clearAll"
+          class="flex-1 py-1.5 border border-dwf-border text-[12px] text-[#5b3f43] font-medium hover:bg-dwf-cream transition-all rounded">
+          Clear All
+        </button>
+      </div>
+
+      <!-- Tips -->
+      <div class="bg-white p-4 rounded-lg border-l-[3px] border-dwf-pink" style="box-shadow:0 12px 32px -4px rgba(50,50,50,0.06)">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined text-[18px] text-dwf-pink" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">lightbulb</span>
+          <h4 class="text-[12.5px] font-bold text-dwf-pink">Tips</h4>
+        </div>
+        <ul class="text-[12px] text-[#323232] leading-[1.6] space-y-2">
+          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Fill <strong>Matter</strong>, <strong>Plaintiff</strong> &amp; <strong>Personnel</strong> first — used in all documents.</span></li>
+          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Brief Index: enter as <code class="px-1.5 py-0.5 rounded bg-dwf-cream text-[#2b3a50] font-mono">Name | Date | Pages</code></span></li>
+          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Blank fields get <code class="px-1.5 py-0.5 rounded bg-dwf-cream text-[#2b3a50] font-mono">[TBC]</code> placeholders.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="p-5 border-t border-dwf-border">
+      <button type="submit" id="generateBtn"
+        class="w-full h-[44px] bg-dwf-pink hover:bg-dwf-pink2 text-white font-bold text-[13px] tracking-widest flex items-center justify-center gap-3 rounded-md transition-all active:scale-[0.98] hover:-translate-y-0.5 shadow-lg shadow-dwf-pink/20 hover:shadow-dwf-pink/40">
+        <span id="btnText">GENERATE &amp; DOWNLOAD</span>
+        <span id="btnIcon" class="material-symbols-outlined text-[20px]">download</span>
+        <span id="btnSpinner" class="hidden">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+        </span>
+      </button>
+      <!-- Outlook button -->
+      <button type="button" id="outlookBtn"
+        class="w-full h-[44px] mt-2 bg-[#0072C6] hover:bg-[#005a9e] text-white font-bold text-[12px] tracking-widest flex items-center justify-center gap-2 rounded-md transition-all active:scale-[0.98] hover:-translate-y-0.5 shadow-md shadow-blue-900/20">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M24 7.387v13.227C24 21.919 22.919 23 21.614 23H8.386C7.081 23 6 21.919 6 20.614V18h10.614C17.919 18 19 16.919 19 15.614V6h2.614C22.919 6 24 7.081 24 7.387z"/><path d="M18 3.386v12.228C18 16.919 16.919 18 15.614 18H2.386C1.081 18 0 16.919 0 15.614V3.386C0 2.081 1.081 1 2.386 1h13.228C16.919 1 18 2.081 18 3.386zM9 4.5C6.519 4.5 4.5 6.519 4.5 9S6.519 13.5 9 13.5 13.5 11.481 13.5 9 11.481 4.5 9 4.5z"/><path d="M9 6c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3z" fill="#0072C6"/></svg>
+        <span id="outlookBtnText">SEND VIA OUTLOOK</span>
+        <span id="outlookSpinner" class="hidden">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+        </span>
+      </button>
+      <p class="text-[10px] text-center text-[#906f73] mt-3 uppercase font-bold tracking-tighter">Powered by DWF Ireland Intelligence Hub</p>
+      <div id="errorAlert" class="hidden mt-3 bg-red-50 border border-red-200 border-l-2 border-l-red-500 text-red-700 text-xs p-3 rounded"></div>
+    </div>
+  </aside>
+
+</div>
+</form>
+
+<script>
+// Toggle section open/closed
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('hidden');
+  chevron.style.transform = body.classList.contains('hidden') ? 'rotate(-90deg)' : 'rotate(0deg)';
+}
+
+// Scroll to section + highlight nav
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Open if closed
+    const body = el.querySelector('.section-body');
+    const chevron = el.querySelector('.chevron');
+    if (body && body.classList.contains('hidden')) {
+      body.classList.remove('hidden');
+      if (chevron) chevron.style.transform = 'rotate(0deg)';
+    }
+  }
+  // Update active nav
+  document.querySelectorAll('#sideNav a').forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + id) a.classList.add('active');
+  });
+  return false;
+}
+
+// WRC fields toggle
+document.getElementById('courtSelect').addEventListener('change', function() {
+  const isWrc = this.value.toLowerCase().includes('wrc');
+  document.querySelectorAll('.wrc-field').forEach(el => {
+    el.classList.toggle('hidden', !isWrc);
+  });
+});
+
+// Select/clear all
+document.getElementById('selectAll').addEventListener('click', () => {
+  document.querySelectorAll('input[name="documents"]').forEach(cb => cb.checked = true);
+  updateCount();
+});
+document.getElementById('clearAll').addEventListener('click', () => {
+  document.querySelectorAll('input[name="documents"]').forEach(cb => cb.checked = false);
+  updateCount();
+});
+
+// Update selected count
+function updateCount() {
+  const n = document.querySelectorAll('input[name="documents"]:checked').length;
+  document.getElementById('selectedCount').textContent = n + ' of 10 selected';
+}
+document.querySelectorAll('input[name="documents"]').forEach(cb => {
+  cb.addEventListener('change', updateCount);
+});
+updateCount();
+
+// Form submit
+const form = document.getElementById('mainForm');
+const generateBtn = document.getElementById('generateBtn');
+const sidebarGenBtn = document.getElementById('sidebarGenBtn');
+const btnText = document.getElementById('btnText');
+const btnIcon = document.getElementById('btnIcon');
+const btnSpinner = document.getElementById('btnSpinner');
+const errorAlert = document.getElementById('errorAlert');
+
+function setLoading(loading) {
+  [generateBtn, sidebarGenBtn].forEach(b => b.disabled = loading);
+  btnText.textContent = loading ? 'GENERATING…' : 'GENERATE & DOWNLOAD';
+  btnIcon.classList.toggle('hidden', loading);
+  btnSpinner.classList.toggle('hidden', !loading);
+}
+
+function showError(msg) {
+  errorAlert.textContent = msg;
+  errorAlert.classList.remove('hidden');
+  errorAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  errorAlert.classList.add('hidden');
+
+  const selected = document.querySelectorAll('input[name="documents"]:checked');
+  if (selected.length === 0) {
+    showError('Please select at least one document to generate.');
+    return;
+  }
+
+  setLoading(true);
+
+  fetch('/generate', { method: 'POST', body: new FormData(form) })
+    .then(res => {
+      if (!res.ok) return res.json().then(d => { throw new Error(d.error || 'Generation failed.'); });
+      return res.blob();
+    })
+    .then(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'DWF_Documents_' + Date.now() + '.zip';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+      setLoading(false);
+    })
+    .catch(err => {
+      showError(err.message || 'An error occurred.');
+      setLoading(false);
+    });
+});
+
+// Outlook send
+document.getElementById('outlookBtn').addEventListener('click', function() {
+  const selected = document.querySelectorAll('input[name="documents"]:checked');
+  if (selected.length === 0) { showError('Please select at least one document.'); return; }
+  const outlookSpinner = document.getElementById('outlookSpinner');
+  const outlookBtnText = document.getElementById('outlookBtnText');
+  outlookBtnText.textContent = 'PREPARING…';
+  outlookSpinner.classList.remove('hidden');
+  this.disabled = true;
+  const self = this;
+  fetch('/send-outlook', { method: 'POST', body: new FormData(form) })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) throw new Error(data.error);
+      outlookBtnText.textContent = 'DRAFT OPENED ✓';
+      setTimeout(() => { outlookBtnText.textContent = 'SEND VIA OUTLOOK'; outlookSpinner.classList.add('hidden'); self.disabled = false; }, 3000);
+    })
+    .catch(err => {
+      showError(err.message || 'Outlook draft failed.');
+      outlookBtnText.textContent = 'SEND VIA OUTLOOK';
+      outlookSpinner.classList.add('hidden');
+      self.disabled = false;
+    });
+});
+</script>
+<script>
+// Force white nav text after Tailwind CDN finishes processing
+function applyNavColors() {
+  document.querySelectorAll('#sideNav a.nav-item').forEach(el => {
+    el.style.setProperty('color', '#ffffff', 'important');
+    el.style.setProperty('text-decoration', 'none', 'important');
+    el.querySelectorAll('span').forEach(s => s.style.setProperty('color', '#ffffff', 'important'));
+  });
+}
+// Run immediately + after Tailwind settles
+applyNavColors();
+setTimeout(applyNavColors, 100);
+setTimeout(applyNavColors, 500);
+</script>
+</body>
+</html>
