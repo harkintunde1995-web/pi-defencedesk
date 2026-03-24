@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Document Generator | DWF (Ireland) LLP</title>
+<title>PI-DefenceDesk</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -49,9 +49,9 @@
 <!-- ═══ TOP NAV ═══ -->
 <header class="fixed top-0 left-0 w-full z-50 flex items-center px-6 justify-between bg-dwf-dark h-[56px] border-b-[3px] border-dwf-pink">
   <div class="flex items-center">
-    <div class="bg-dwf-pink text-white px-3 py-1 font-black text-[15px] mr-3 tracking-tight">DWF</div>
-    <span class="text-white font-semibold text-sm">Document Generator</span>
-    <span class="text-slate-500 text-xs ml-3 hidden md:inline">DWF (Ireland) LLP</span>
+    <div class="bg-dwf-pink text-white px-3 py-1 font-black text-[15px] mr-3 tracking-tight">PI</div>
+    <span class="text-white font-semibold text-sm">PI-DefenceDesk</span>
+    <span class="text-slate-500 text-xs ml-3 hidden md:inline">Personal Injury · Insurance Defence</span>
   </div>
   <div class="flex items-center space-x-3">
     <span class="text-slate-500 text-[11px] hidden md:inline">Personal Injury · Insurance Defence</span>
@@ -70,7 +70,7 @@
   <!-- ═══ LEFT SIDEBAR ═══ -->
   <aside class="flex flex-col h-full bg-dwf-dark w-[220px] shrink-0 border-r border-white/10">
     <div class="p-5 pb-2">
-      <div class="text-white font-bold tracking-widest uppercase text-[10px] opacity-50 mb-0.5">DWF Legal Folio</div>
+      <div class="text-white font-bold tracking-widest uppercase text-[10px] opacity-50 mb-0.5">PI-DefenceDesk</div>
       <div class="text-dwf-pink text-[9px] font-bold uppercase tracking-wider mb-5">Document Automation</div>
 
       <nav class="flex-1 py-2" id="sideNav">
@@ -95,7 +95,7 @@
           </a>
           <a class="nav-item" href="#sec-personnel" onclick="return scrollTo('sec-personnel')">
             <span class="material-symbols-outlined text-[16px]">group</span>
-            <span>DWF Personnel</span>
+            <span>Personnel</span>
           </a>
         </div>
         <!-- PROCEEDINGS -->
@@ -188,7 +188,7 @@
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">DWF Reference <span class="text-dwf-pink">*</span></label>
+            <label class="dwf-label">File Reference <span class="text-dwf-pink">*</span></label>
             <input name="matter_ref" class="dwf-input" placeholder="e.g. 2034157-102" required/>
           </div>
           <div class="col-span-4 space-y-1">
@@ -373,12 +373,12 @@
         </div>
       </div>
 
-      <!-- ─── DWF PERSONNEL ─── -->
+      <!-- ─── PERSONNEL ─── -->
       <div class="section-card" id="sec-personnel">
         <div class="section-header" onclick="toggleSection(this)">
           <div class="flex items-center space-x-3">
             <span class="material-symbols-outlined text-dwf-pink text-[18px]">group</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">DWF Personnel</h2>
+            <h2 class="font-bold text-[#1c1c19] text-sm">Personnel</h2>
           </div>
           <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
         </div>
@@ -440,7 +440,7 @@
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-12">
-            <p class="text-xs text-slate-400 mb-3">Leave blank to use DWF defaults (Partner €300, Associate €250, Paralegal €150, VAT 23%)</p>
+            <p class="text-xs text-slate-400 mb-3">Leave blank to use suggested defaults (Partner €300, Associate €250, Paralegal €150, VAT 23%)</p>
           </div>
           <div class="col-span-4 space-y-1">
             <label class="dwf-label">Partner (€/hr)</label>
@@ -497,7 +497,7 @@
           </div>
           <div class="col-span-4 space-y-1">
             <label class="dwf-label">Date of Instruction</label>
-            <input name="date_instruction" class="dwf-input" placeholder="Date DWF instructed"/>
+            <input name="date_instruction" class="dwf-input" placeholder="Date instructed"/>
           </div>
           <div class="col-span-8 space-y-1">
             <label class="dwf-label">Incident Location</label>
@@ -636,7 +636,7 @@
           <div class="col-span-12 space-y-1">
             <label class="dwf-label font-extrabold">Section D — Interpartes Correspondence</label>
             <textarea name="section_d_docs" class="dwf-input mono" rows="2"
-              placeholder="Correspondence between DWF and Plaintiff's Solicitors | DD.MM.YYYY – DD.MM.YYYY | 1 - 45"></textarea>
+              placeholder="Correspondence between Defence and Plaintiff's Solicitors | DD.MM.YYYY – DD.MM.YYYY | 1 - 45"></textarea>
           </div>
           <div class="col-span-4 space-y-1">
             <label class="dwf-label">Section E Title (optional)</label>
@@ -722,7 +722,7 @@
           <div class="grid grid-cols-12 gap-5">
             <div class="col-span-6 space-y-1">
               <label class="dwf-label">Letterhead</label>
-              <input name="letterhead_text" class="dwf-input" placeholder="e.g. DWF (Ireland) LLP — One Spencer Dock, Dublin 1"/>
+              <input name="letterhead_text" class="dwf-input" placeholder="e.g. Your Firm Name — Address Line, Dublin 1"/>
             </div>
             <div class="col-span-6 space-y-1">
               <label class="dwf-label">Footer</label>
@@ -1113,7 +1113,7 @@
           </svg>
         </span>
       </button>
-      <p class="text-[10px] text-center text-[#906f73] mt-3 uppercase font-bold tracking-tighter">Powered by DWF Ireland Intelligence Hub</p>
+      <p class="text-[10px] text-center text-[#906f73] mt-3 uppercase font-bold tracking-tighter">PI-DefenceDesk · Personal Injury Document Automation</p>
       <div id="errorAlert" class="hidden mt-3 bg-red-50 border border-red-200 border-l-2 border-l-red-500 text-red-700 text-xs p-3 rounded"></div>
     </div>
   </aside>
@@ -1221,7 +1221,7 @@ form.addEventListener('submit', function(e) {
     .then(blob => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = 'DWF_Documents_' + Date.now() + '.zip';
+      a.href = url; a.download = 'PIDefenceDesk_' + Date.now() + '.zip';
       document.body.appendChild(a); a.click();
       document.body.removeChild(a); URL.revokeObjectURL(url);
       setLoading(false);

@@ -1,5 +1,5 @@
 """
-DWF (Ireland) LLP — Document Generator
+PI-DefenceDesk — Personal Injury Insurance Defence Document Generator
 Flask web application
 """
 
@@ -23,7 +23,7 @@ DOCUMENT_LABELS = {
     "preliminary_report":  "Preliminary Report",
     "brief_cover":         "Brief Cover Page",
     "index_brief":         "Index to Brief",
-    "standard_letter":     "Standard Letter (DWF Letterhead)",
+    "standard_letter":     "Standard Letter",
     "rba_form":            "RBA Form (Recovery of Benefits)",
     "notice_particulars":  "Notice for Particulars",
     "appearance_hc":       "Memorandum of Appearance — High Court",
@@ -81,7 +81,7 @@ def generate():
 
     ref = data.get("matter_ref", "documents").replace("/", "-").replace(" ", "_")
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    zip_name = f"DWF_{ref}_{timestamp}.zip"
+    zip_name = f"PIDefenceDesk_{ref}_{timestamp}.zip"
 
     return send_file(
         zip_buffer,
@@ -118,12 +118,12 @@ def send_outlook():
     matter_ref   = data.get("matter_ref", "")
     plaintiff    = data.get("plaintiff_name", "")
     recipient_to = data.get("recipient_email", data.get("insurer_contact_email", ""))
-    subject      = f"DWF — {matter_ref} — {plaintiff}".strip(" — ")
+    subject      = f"{matter_ref} — {plaintiff}".strip(" — ")
     body         = (
         f"Please find attached correspondence in the above matter.\n\n"
         f"Matter Reference: {matter_ref}\n"
         f"Plaintiff: {plaintiff}\n\n"
-        f"Kind regards,\n{data.get('handler_name', 'DWF (Ireland) LLP')}"
+        f"Kind regards,\n{data.get('handler_name', '')}"
     )
 
     # Build AppleScript — works for Microsoft Outlook on macOS
@@ -166,7 +166,7 @@ end tell
 
 if __name__ == "__main__":
     print("\n" + "=" * 55)
-    print("  DWF Ireland — Document Generator")
+    print("  PI-DefenceDesk — Personal Injury Document Generator")
     print("  Open your browser at:  http://localhost:5050")
     print("=" * 55 + "\n")
     app.run(debug=False, port=5050)
