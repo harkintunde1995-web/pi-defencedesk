@@ -3,225 +3,234 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PI-DefenceDesk</title>
+<title>Personal Injury Defence Desk</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          "dwf-dark":  "#222e40",
-          "dwf-navy":  "#2b3a50",
-          "dwf-pink":  "#d60056",
-          "dwf-pink2": "#ff0a6d",
-          "dwf-cream": "#f0ece7",
-          "dwf-cream2":"#ece6df",
-          "dwf-text":  "#323232",
-          "dwf-border":"#ddd8d2",
+          "surface-container-lowest":  "#ffffff",
+          "surface-container-low":     "#f3f4f5",
+          "surface-container":         "#edeeef",
+          "surface-container-high":    "#e7e8e9",
+          "surface-container-highest": "#e1e3e4",
+          "surface-dim":               "#d9dadb",
+          "surface":                   "#f8f9fa",
+          "primary":                   "#001831",
+          "primary-container":         "#002d54",
+          "on-primary":                "#ffffff",
+          "secondary":                 "#006971",
+          "on-secondary":              "#ffffff",
+          "on-surface":                "#191c1d",
+          "on-surface-variant":        "#43474e",
+          "outline":                   "#73777f",
+          "outline-variant":           "#c3c6cf",
+          "error":                     "#ba1a1a",
+          "error-container":           "#ffdad6",
+          "on-error-container":        "#93000a",
         },
-        fontFamily: { sans: ["Inter","sans-serif"] },
-        borderRadius: { DEFAULT:"0.125rem", lg:"0.25rem", xl:"0.5rem" },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          lg:      "0.75rem",
+          xl:      "1rem",
+          full:    "9999px",
+        },
+        fontFamily: {
+          headline: ["Manrope", "sans-serif"],
+          body:     ["Inter",   "sans-serif"],
+        },
       }
     }
   }
 </script>
 <style>
-  body { font-family:'Inter',sans-serif; background:#f0ece7; color:#323232; }
-  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; user-select:none; }
-  ::-webkit-scrollbar { width:5px; }
-  ::-webkit-scrollbar-track { background:transparent; }
-  ::-webkit-scrollbar-thumb { background:#ddd8d2; border-radius:10px; }
-  .dwf-input { @apply w-full bg-white border-b-2 border-slate-200 focus:border-dwf-pink focus:ring-0 transition-all py-2 px-1 text-sm outline-none; }
-  .dwf-label { @apply block text-[12px] font-bold text-[#323232] mb-1; }
-  .dwf-select { @apply w-full bg-white border-b-2 border-slate-200 focus:border-dwf-pink focus:ring-0 transition-all py-2 px-1 text-sm outline-none; }
-  .section-card { @apply bg-white rounded overflow-hidden mb-5; box-shadow: 0 12px 32px -4px rgba(50,50,50,0.08); }
-  .section-header { @apply px-5 py-4 flex items-center justify-between cursor-pointer hover:bg-dwf-cream transition-colors; }
-  .pink-accent { accent-color:#d60056; }
-  .nav-item { @apply flex items-center py-2.5 px-4 transition-all cursor-pointer text-xs; }
-  input[type=checkbox].pink-accent { accent-color:#d60056; width:14px; height:14px; }
-  textarea.mono { font-family:'SFMono-Regular',Consolas,monospace; font-size:12px; background:#faf8f5; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    user-select: none;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #c3c6cf; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #73777f; }
+
+  .glass-nav {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(16px);
+  }
+
+  .pb-label  { display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #43474e; margin-bottom: 0.5rem; }
+  .pb-input  { display: block; width: 100%; background-color: #f3f4f5; border: none; border-radius: 0.75rem; padding: 0.75rem; font-size: 0.875rem; line-height: 1.25rem; color: #191c1d; outline: none; transition: background-color 0.15s, box-shadow 0.15s; box-sizing: border-box; }
+  .pb-input:focus  { background-color: #ffffff; box-shadow: 0 0 0 2px rgba(0,105,113,0.25); }
+  .pb-select { display: block; width: 100%; background-color: #f3f4f5; border: none; border-radius: 0.75rem; padding: 0.75rem; font-size: 0.875rem; line-height: 1.25rem; color: #191c1d; outline: none; appearance: auto; box-sizing: border-box; }
+  .pb-select:focus { background-color: #ffffff; box-shadow: 0 0 0 2px rgba(0,105,113,0.25); }
+
+  .section-card   { background-color: #ffffff; border-radius: 1rem; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 4px 20px rgba(25,28,29,0.06); }
+  .section-header { padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background-color 0.15s; }
+  .section-header:hover { background-color: #f3f4f5; }
+
+  .nav-item        { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 1rem; border-radius: 0.5rem; margin: 0 0.5rem; font-size: 0.875rem; color: #43474e; cursor: pointer; transition: background-color 0.15s; }
+  .nav-item:hover  { background-color: #e7e8e9; }
+  .nav-item.active { background-color: #ffffff; color: #006971; font-weight: 700; box-shadow: 0 1px 4px rgba(25,28,29,0.08); }
+
+  .te-input { @apply w-full bg-surface-container-low border-0 rounded p-1.5 text-[11px] text-on-surface outline-none focus:ring-1 focus:ring-secondary/20 transition-all; }
+
+  textarea.mono { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; }
 </style>
 </head>
-<body class="overflow-hidden h-screen flex flex-col">
+<body class="bg-surface-container-low font-body text-on-surface antialiased overflow-hidden h-screen flex flex-col">
 
-<!-- ═══ TOP NAV ═══ -->
-<header class="fixed top-0 left-0 w-full z-50 flex items-center px-6 justify-between bg-dwf-dark h-[56px] border-b-[3px] border-dwf-pink">
-  <div class="flex items-center">
-    <div class="bg-dwf-pink text-white px-3 py-1 font-black text-[15px] mr-3 tracking-tight">PI</div>
-    <span class="text-white font-semibold text-sm">PI-DefenceDesk</span>
-    <span class="text-slate-500 text-xs ml-3 hidden md:inline">Personal Injury · Insurance Defence</span>
-  </div>
-  <div class="flex items-center space-x-3">
-    <span class="text-slate-500 text-[11px] hidden md:inline">Personal Injury · Insurance Defence</span>
-    <button class="text-slate-400 hover:bg-white/10 p-1.5 rounded-full transition-all">
-      <span class="material-symbols-outlined text-[20px]">help_outline</span>
-    </button>
-    <button class="text-slate-400 hover:bg-white/10 p-1.5 rounded-full transition-all">
-      <span class="material-symbols-outlined text-[22px]">account_circle</span>
-    </button>
+<!-- TOP NAV -->
+<header class="fixed top-0 w-full z-50 glass-nav border-b border-outline-variant/20 h-16 flex items-center justify-between px-6">
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-white text-sm" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">gavel</span>
+    </div>
+    <span class="font-headline font-black text-xl text-primary tracking-tighter">Personal Injury Defence Desk</span>
   </div>
 </header>
 
 <form id="mainForm" method="POST" action="/generate">
-<div class="flex flex-1 pt-[56px] overflow-hidden h-screen">
+<div class="flex flex-1 pt-16 overflow-hidden h-screen">
 
-  <!-- ═══ LEFT SIDEBAR ═══ -->
-  <aside class="flex flex-col h-full bg-dwf-dark w-[220px] shrink-0 border-r border-white/10">
-    <div class="p-5 pb-2">
-      <div class="text-white font-bold tracking-widest uppercase text-[10px] opacity-50 mb-0.5">PI-DefenceDesk</div>
-      <div class="text-dwf-pink text-[9px] font-bold uppercase tracking-wider mb-5">Document Automation</div>
+  <!-- LEFT SIDEBAR -->
+  <aside class="w-[220px] shrink-0 bg-surface-container-low flex flex-col fixed left-0 top-16 bottom-0 overflow-y-auto">
+    <div class="p-4 pb-6">
+      <nav id="sideNav" class="flex flex-col gap-y-0.5 mt-2">
 
-      <nav class="flex-1 py-2" id="sideNav">
-        <!-- MATTER -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Matter</h3>
-          <a class="nav-item active" href="#sec-matter" onclick="return scrollTo('sec-matter')">
-            <span class="material-symbols-outlined text-[16px]">folder_open</span>
-            <span>Matter Details</span>
-          </a>
-        </div>
-        <!-- PARTIES -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Parties</h3>
-          <a class="nav-item" href="#sec-plaintiff" onclick="return scrollTo('sec-plaintiff')">
-            <span class="material-symbols-outlined text-[16px]">person</span>
-            <span>Plaintiff</span>
-          </a>
-          <a class="nav-item" href="#sec-client" onclick="return scrollTo('sec-client')">
-            <span class="material-symbols-outlined text-[16px]">business</span>
-            <span>Defendant / Insured</span>
-          </a>
-          <a class="nav-item" href="#sec-personnel" onclick="return scrollTo('sec-personnel')">
-            <span class="material-symbols-outlined text-[16px]">group</span>
-            <span>Personnel</span>
-          </a>
-        </div>
-        <!-- PROCEEDINGS -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Proceedings</h3>
-          <a class="nav-item" href="#sec-court" onclick="return scrollTo('sec-court')">
-            <span class="material-symbols-outlined text-[16px]">gavel</span>
-            <span>Court &amp; Proceedings</span>
-          </a>
-          <a class="nav-item" href="#sec-incident" onclick="return scrollTo('sec-incident')">
-            <span class="material-symbols-outlined text-[16px]">warning</span>
-            <span>Incident</span>
-          </a>
-        </div>
-        <!-- FINANCIALS -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Financials</h3>
-          <a class="nav-item" href="#sec-fees" onclick="return scrollTo('sec-fees')">
-            <span class="material-symbols-outlined text-[16px]">payments</span>
-            <span>Fee Schedule</span>
-          </a>
-        </div>
-        <!-- BRANDING -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Branding</h3>
-          <a class="nav-item" href="#sec-branding" onclick="return scrollTo('sec-branding')">
-            <span class="material-symbols-outlined text-[16px]">photo_library</span>
-            <span>Page Spacing</span>
-          </a>
-        </div>
-        <!-- DOCUMENTS -->
-        <div class="mb-5">
-          <h3 class="px-5 text-[10px] font-bold text-slate-400 uppercase tracking-[0.08em] mb-1">Documents</h3>
-          <a class="nav-item" href="#sec-report" onclick="return scrollTo('sec-report')">
-            <span class="material-symbols-outlined text-[16px]">description</span>
-            <span>Prelim Report</span>
-          </a>
-          <a class="nav-item" href="#sec-brief" onclick="return scrollTo('sec-brief')">
-            <span class="material-symbols-outlined text-[16px]">menu_book</span>
-            <span>Brief / Index</span>
-          </a>
-          <a class="nav-item" href="#sec-letter" onclick="return scrollTo('sec-letter')">
-            <span class="material-symbols-outlined text-[16px]">mail</span>
-            <span>Standard Letter</span>
-          </a>
-          <a class="nav-item" href="#sec-nfp" onclick="return scrollTo('sec-nfp')">
-            <span class="material-symbols-outlined text-[16px]">format_list_numbered</span>
-            <span>Extra Particulars</span>
-          </a>
-        </div>
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-1 mb-0.5">Matter</p>
+        <a class="nav-item active" href="#sec-matter" onclick="return scrollTo('sec-matter')">
+          <span class="material-symbols-outlined text-[16px]">folder_open</span>
+          <span>Matter Details</span>
+        </a>
+
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-3 mb-0.5">Parties</p>
+        <a class="nav-item" href="#sec-plaintiff" onclick="return scrollTo('sec-plaintiff')">
+          <span class="material-symbols-outlined text-[16px]">person</span>
+          <span>Plaintiff</span>
+        </a>
+        <a class="nav-item" href="#sec-client" onclick="return scrollTo('sec-client')">
+          <span class="material-symbols-outlined text-[16px]">business</span>
+          <span>Defendant / Insured</span>
+        </a>
+        <a class="nav-item" href="#sec-personnel" onclick="return scrollTo('sec-personnel')">
+          <span class="material-symbols-outlined text-[16px]">group</span>
+          <span>Personnel</span>
+        </a>
+
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-3 mb-0.5">Proceedings</p>
+        <a class="nav-item" href="#sec-court" onclick="return scrollTo('sec-court')">
+          <span class="material-symbols-outlined text-[16px]">gavel</span>
+          <span>Court &amp; Proceedings</span>
+        </a>
+        <a class="nav-item" href="#sec-incident" onclick="return scrollTo('sec-incident')">
+          <span class="material-symbols-outlined text-[16px]">warning</span>
+          <span>Incident</span>
+        </a>
+
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-3 mb-0.5">Financials</p>
+        <a class="nav-item" href="#sec-fees" onclick="return scrollTo('sec-fees')">
+          <span class="material-symbols-outlined text-[16px]">payments</span>
+          <span>Fee Schedule</span>
+        </a>
+
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-3 mb-0.5">Branding</p>
+        <a class="nav-item" href="#sec-branding" onclick="return scrollTo('sec-branding')">
+          <span class="material-symbols-outlined text-[16px]">vertical_distribute</span>
+          <span>Page Spacing</span>
+        </a>
+
+        <p class="px-4 text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mt-3 mb-0.5">Documents</p>
+        <a class="nav-item" href="#sec-report" onclick="return scrollTo('sec-report')">
+          <span class="material-symbols-outlined text-[16px]">description</span>
+          <span>Prelim Report</span>
+        </a>
+        <a class="nav-item" href="#sec-brief" onclick="return scrollTo('sec-brief')">
+          <span class="material-symbols-outlined text-[16px]">menu_book</span>
+          <span>Brief / Index</span>
+        </a>
+        <a class="nav-item" href="#sec-letter" onclick="return scrollTo('sec-letter')">
+          <span class="material-symbols-outlined text-[16px]">mail</span>
+          <span>Standard Letter</span>
+        </a>
+        <a class="nav-item" href="#sec-nfp" onclick="return scrollTo('sec-nfp')">
+          <span class="material-symbols-outlined text-[16px]">format_list_numbered</span>
+          <span>Extra Particulars</span>
+        </a>
+        <a class="nav-item" href="#sec-litigation" onclick="return scrollTo('sec-litigation')">
+          <span class="material-symbols-outlined text-[16px]">account_balance</span>
+          <span>Litigation Docs</span>
+        </a>
+        <a class="nav-item" href="#sec-billing" onclick="return scrollTo('sec-billing')">
+          <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+          <span>Billing / Fee Note</span>
+        </a>
+
       </nav>
-    </div>
-
-    <div class="mt-auto p-4 bg-[#1a2332]/50 border-t border-white/10">
-      <div class="text-center mb-3">
-        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500" id="selectedCount">0 of 10 selected</span>
-      </div>
-      <button type="submit" id="sidebarGenBtn"
-        class="w-full bg-dwf-pink text-white text-[10px] font-extrabold tracking-widest py-3.5 rounded hover:bg-dwf-pink2 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(214,0,86,0.35)]">
-        <span class="material-symbols-outlined text-[14px]">download</span>
-        GENERATE &amp; DOWNLOAD
-      </button>
     </div>
   </aside>
 
-  <!-- ═══ MAIN FORM ═══ -->
-  <main class="flex-1 bg-dwf-cream overflow-y-auto px-8 py-6" id="mainScroll">
-    <div class="max-w-3xl mx-auto space-y-5">
+  <!-- MAIN FORM -->
+  <main class="flex-1 ml-[220px] mr-[300px] overflow-y-auto px-8 py-8 bg-surface-container-low" id="mainScroll">
+    <div class="max-w-3xl mx-auto space-y-6">
 
       <!-- Page header -->
-      <div class="flex items-baseline justify-between mb-2">
-        <div>
-          <h1 class="text-xl font-bold text-[#1c1c19] tracking-tight">New Matter</h1>
-          <p class="text-xs text-slate-500 mt-0.5">Fill in the sections below then select documents to generate on the right.</p>
-        </div>
-        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-dwf-pink"></span>
-          Personal Injury / Insurance Defence
-        </div>
+      <div class="mb-8">
+        <span class="text-secondary font-bold tracking-widest text-[10px] uppercase">Personal Injury · Insurance Defence</span>
+        <h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight mt-1">New Matter</h1>
+        <p class="text-sm text-on-surface-variant mt-1">Fill in the sections below, then select documents to generate on the right.</p>
       </div>
 
-      <!-- ─── MATTER DETAILS ─── -->
+      <!-- ── MATTER DETAILS ── -->
       <div class="section-card" id="sec-matter">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">folder_open</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Matter Details</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">folder_open</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Matter Details</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">File Reference <span class="text-dwf-pink">*</span></label>
-            <input name="matter_ref" class="dwf-input" placeholder="e.g. 2034157-102" required/>
+            <label class="pb-label">File Reference <span class="text-error">*</span></label>
+            <input name="matter_ref" class="pb-input" placeholder="e.g. 2034157-102" required/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Document Date <span class="text-dwf-pink">*</span></label>
-            <input name="matter_date" class="dwf-input" value="{{ today }}" required/>
+            <label class="pb-label">Document Date <span class="text-error">*</span></label>
+            <input name="matter_date" class="pb-input" value="{{ today }}" required/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Report Date (if different)</label>
-            <input name="report_date" class="dwf-input" placeholder="Leave blank to use above"/>
+            <label class="pb-label">Report Date (if different)</label>
+            <input name="report_date" class="pb-input" placeholder="Leave blank to use above"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Insurer (short) <span class="text-dwf-pink">*</span></label>
-            <input name="insurer_name" class="dwf-input" placeholder="e.g. QBE" required/>
+            <label class="pb-label">Insurer (short) <span class="text-error">*</span></label>
+            <input name="insurer_name" class="pb-input" placeholder="e.g. QBE" required/>
           </div>
           <div class="col-span-8 space-y-1">
-            <label class="dwf-label">Insurer Full Name</label>
-            <input name="insurer_name_full" class="dwf-input" placeholder="e.g. QBE Insurance (Europe) Limited"/>
+            <label class="pb-label">Insurer Full Name</label>
+            <input name="insurer_name_full" class="pb-input" placeholder="e.g. QBE Insurance (Europe) Limited"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Policy Number</label>
-            <input name="policy_no" class="dwf-input" placeholder="Policy number"/>
+            <label class="pb-label">Policy Number</label>
+            <input name="policy_no" class="pb-input" placeholder="Policy number"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Policy Period — From</label>
-            <input name="policy_period_from" class="dwf-input" placeholder="e.g. 01 January 2024"/>
+            <label class="pb-label">Policy Period — From</label>
+            <input name="policy_period_from" class="pb-input" placeholder="e.g. 01 January 2024"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Policy Period — To</label>
-            <input name="policy_period_to" class="dwf-input" placeholder="e.g. 31 December 2024"/>
+            <label class="pb-label">Policy Period — To</label>
+            <input name="policy_period_to" class="pb-input" placeholder="e.g. 31 December 2024"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Policy Type</label>
-            <select name="policy_type" class="dwf-select">
+            <label class="pb-label">Policy Type</label>
+            <select name="policy_type" class="pb-select">
               <option value="">— Select —</option>
               <option>Employer Liability</option>
               <option>Public Liability</option>
@@ -233,111 +242,114 @@
             </select>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Policy Excess (€)</label>
-            <input name="policy_excess" class="dwf-input" placeholder="e.g. 10000"/>
+            <label class="pb-label">Policy Excess (€)</label>
+            <input name="policy_excess" class="pb-input" placeholder="e.g. 10000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Insurer's Reference</label>
-            <input name="insurer_ref" class="dwf-input" placeholder="e.g. QB/22/11361"/>
+            <label class="pb-label">Insurer's Reference</label>
+            <input name="insurer_ref" class="pb-input" placeholder="e.g. QB/22/11361"/>
           </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Insurer Address</label>
-            <input name="insurer_address" class="dwf-input" placeholder="Insurer's full address"/>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Insurer Address</label>
+            <input name="insurer_address" class="pb-input" placeholder="Insurer's full address"/>
           </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Company Ref (Internal)</label>
-            <input name="company_ref" class="dwf-input" placeholder="e.g. TBC"/>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Company Ref (Internal)</label>
+            <input name="company_ref" class="pb-input" placeholder="e.g. TBC"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── PLAINTIFF ─── -->
+      <!-- ── PLAINTIFF ── -->
       <div class="section-card" id="sec-plaintiff">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">person</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Plaintiff Details</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">person</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Plaintiff Details</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Plaintiff Full Name <span class="text-dwf-pink">*</span></label>
-            <input name="plaintiff_name" class="dwf-input" placeholder="e.g. John Doe" required/>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Plaintiff Full Name <span class="text-error">*</span></label>
+            <input name="plaintiff_name" class="pb-input" placeholder="e.g. John Doe" required/>
           </div>
-          <div class="col-span-3 space-y-1">
-            <label class="dwf-label">Date of Birth</label>
-            <input name="plaintiff_dob" class="dwf-input" placeholder="DD/MM/YYYY"/>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Date of Birth</label>
+            <input name="plaintiff_dob" class="pb-input" placeholder="DD/MM/YYYY"/>
           </div>
-          <div class="col-span-3 space-y-1">
-            <label class="dwf-label">Gender</label>
-            <select name="plaintiff_gender" class="dwf-select">
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Gender</label>
+            <select name="plaintiff_gender" class="pb-select">
               <option value="">— Select —</option>
               <option>Male</option>
               <option>Female</option>
             </select>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">PPS Number</label>
-            <input name="plaintiff_pps" class="dwf-input" placeholder="For RBA form"/>
+            <label class="pb-label">PPS Number</label>
+            <input name="plaintiff_pps" class="pb-input" placeholder="For RBA form"/>
           </div>
           <div class="col-span-8 space-y-1">
-            <label class="dwf-label">Plaintiff Address</label>
-            <input name="plaintiff_address" class="dwf-input" placeholder="Full address"/>
+            <label class="pb-label">Plaintiff Address</label>
+            <input name="plaintiff_address" class="pb-input" placeholder="Full address"/>
           </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Plaintiff's Solicitors Firm</label>
-            <input name="plaintiff_solicitor_firm" class="dwf-input" placeholder="e.g. Doe & Partners Solicitors"/>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Plaintiff's Solicitors Firm</label>
+            <input name="plaintiff_solicitor_firm" class="pb-input" placeholder="e.g. Doe &amp; Partners Solicitors"/>
           </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Plaintiff's Solicitors Address</label>
-            <input name="plaintiff_solicitor_address" class="dwf-input" placeholder="Address of plaintiff's solicitors"/>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Plaintiff's Solicitors Address</label>
+            <input name="plaintiff_solicitor_address" class="pb-input" placeholder="Address of plaintiff's solicitors"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── DEFENDANT / CLIENT ─── -->
+      <!-- ── DEFENDANT / CLIENT ── -->
       <div class="section-card" id="sec-client">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">business</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Defendant / Insured Client</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">business</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Defendant / Insured Client</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
-        </div>
-        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Insured / Defendant Name <span class="text-dwf-pink">*</span></label>
-            <input name="client_name" class="dwf-input" placeholder="e.g. Example Company Ltd" required/>
-          </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Client Address</label>
-            <input name="client_address" class="dwf-input" placeholder="Full address"/>
-          </div>
-          <div class="col-span-7 space-y-1">
-            <label class="dwf-label">Additional Defendants</label>
-            <input name="additional_defendants" class="dwf-input" placeholder="e.g. AND SECOND NAMED DEFENDANT LIMITED"/>
-          </div>
-          <div class="col-span-5 space-y-1">
-            <label class="dwf-label">Defended Party Description</label>
-            <input name="defended_party" class="dwf-input" value="First Named Defendant"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─── COURT ─── -->
-      <div class="section-card" id="sec-court">
-        <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">gavel</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Court &amp; Proceedings</h2>
-          </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Court / Forum <span class="text-dwf-pink">*</span></label>
-            <select name="court_type" class="dwf-select" id="courtSelect" required>
+            <label class="pb-label">Insured / Defendant Name <span class="text-error">*</span></label>
+            <input name="client_name" class="pb-input" placeholder="e.g. Example Company Ltd" required/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Client Address</label>
+            <input name="client_address" class="pb-input" placeholder="Full address"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Additional Defendants</label>
+            <input name="additional_defendants" class="pb-input" placeholder="e.g. AND SECOND NAMED DEFENDANT LIMITED"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Defended Party Description</label>
+            <input name="defended_party" class="pb-input" value="First Named Defendant"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── COURT & PROCEEDINGS ── -->
+      <div class="section-card" id="sec-court">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">gavel</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Court &amp; Proceedings</h2>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
+        </div>
+        <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Court / Forum <span class="text-error">*</span></label>
+            <select name="court_type" class="pb-select" id="courtSelect" required>
               <option value="">— Select —</option>
               <option value="High Court">High Court</option>
               <option value="Circuit Court">Circuit Court</option>
@@ -346,12 +358,12 @@
             </select>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Record Number</label>
-            <input name="record_no" class="dwf-input" placeholder="e.g. 2023/531P"/>
+            <label class="pb-label">Record Number</label>
+            <input name="record_no" class="pb-input" placeholder="e.g. 2023/531P"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Brief Type</label>
-            <select name="brief_type" class="dwf-select">
+            <label class="pb-label">Brief Type</label>
+            <select name="brief_type" class="pb-select">
               <option value="Brief to Counsel">Brief to Counsel</option>
               <option value="Brief for Engineer">Brief for Engineer</option>
               <option value="Brief for Medical Expert">Brief for Medical Expert</option>
@@ -359,53 +371,54 @@
             </select>
           </div>
           <div class="col-span-4 space-y-1 wrc-field hidden">
-            <label class="dwf-label">WRC ADJ Number</label>
-            <input name="adj_no" class="dwf-input" placeholder="e.g. 00045566"/>
+            <label class="pb-label">WRC ADJ Number</label>
+            <input name="adj_no" class="pb-input" placeholder="e.g. 00045566"/>
           </div>
           <div class="col-span-4 space-y-1 wrc-field hidden">
-            <label class="dwf-label">WRC CA Number</label>
-            <input name="ca_no" class="dwf-input" placeholder="e.g. 00056309"/>
+            <label class="pb-label">WRC CA Number</label>
+            <input name="ca_no" class="pb-input" placeholder="e.g. 00056309"/>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Proceedings Issued</label>
-            <input name="proceedings_issued" class="dwf-input" placeholder="e.g. Circuit Court Personal Injuries Summons issued"/>
+            <label class="pb-label">Proceedings Issued</label>
+            <input name="proceedings_issued" class="pb-input" placeholder="e.g. Circuit Court Personal Injuries Summons issued"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── PERSONNEL ─── -->
+      <!-- ── PERSONNEL ── -->
       <div class="section-card" id="sec-personnel">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">group</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Personnel</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">group</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Personnel</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Supervising Partner</label>
-            <input name="partner_name" class="dwf-input" placeholder="e.g. Jane Doe"/>
+            <label class="pb-label">Supervising Partner</label>
+            <input name="partner_name" class="pb-input" placeholder="e.g. Jane Doe"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Partner Email</label>
-            <input name="partner_email" class="dwf-input" placeholder="e.g. partner@example.com"/>
+            <label class="pb-label">Partner Email</label>
+            <input name="partner_email" class="pb-input" placeholder="e.g. partner@example.com"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Phone</label>
-            <input name="handler_phone" class="dwf-input" placeholder="e.g. +353 1 000 0000"/>
+            <label class="pb-label">Phone</label>
+            <input name="handler_phone" class="pb-input" placeholder="e.g. +353 1 000 0000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Case Handler <span class="text-dwf-pink">*</span></label>
-            <input name="handler_name" class="dwf-input" placeholder="e.g. John Doe" required/>
+            <label class="pb-label">Case Handler <span class="text-error">*</span></label>
+            <input name="handler_name" class="pb-input" placeholder="e.g. John Doe" required/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Handler Email <span class="text-dwf-pink">*</span></label>
-            <input name="handler_email" class="dwf-input" placeholder="e.g. handler@example.com" required/>
+            <label class="pb-label">Handler Email <span class="text-error">*</span></label>
+            <input name="handler_email" class="pb-input" placeholder="e.g. handler@example.com" required/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Handler Title</label>
-            <select name="handler_title" class="dwf-select">
+            <label class="pb-label">Handler Title</label>
+            <select name="handler_title" class="pb-select">
               <option>Solicitor</option>
               <option>Senior Associate</option>
               <option>Associate</option>
@@ -414,550 +427,548 @@
             </select>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Complaints Partner</label>
-            <input name="complaints_partner" class="dwf-input" placeholder="e.g. Jane Doe"/>
+            <label class="pb-label">Complaints Partner</label>
+            <input name="complaints_partner" class="pb-input" placeholder="e.g. Jane Doe"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Complaints Phone</label>
-            <input name="complaints_phone" class="dwf-input" placeholder="e.g. +353 1 000 0000"/>
+            <label class="pb-label">Complaints Phone</label>
+            <input name="complaints_phone" class="pb-input" placeholder="e.g. +353 1 000 0000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Complaints Email</label>
-            <input name="complaints_email" class="dwf-input" placeholder="e.g. complaints@example.com"/>
+            <label class="pb-label">Complaints Email</label>
+            <input name="complaints_email" class="pb-input" placeholder="e.g. complaints@example.com"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── FEE SCHEDULE ─── -->
+      <!-- ── FEE SCHEDULE ── -->
       <div class="section-card" id="sec-fees">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">payments</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Fee Schedule</h2>
-            <span class="text-[10px] text-slate-400 font-normal ml-1">— for LOE Hourly</span>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">payments</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Fee Schedule</h2>
+            <span class="text-[10px] text-on-surface-variant font-normal">— for LOE Hourly</span>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-12">
-            <p class="text-xs text-slate-400 mb-3">Leave blank to use suggested defaults (Partner €300, Associate €250, Paralegal €150, VAT 23%)</p>
+            <p class="text-xs text-on-surface-variant mb-3">Leave blank to use suggested defaults (Partner €300, Associate €250, Paralegal €150, VAT 23%)</p>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Partner (€/hr)</label>
-            <input name="rate_partner" class="dwf-input" placeholder="300"/>
+            <label class="pb-label">Partner (€/hr)</label>
+            <input name="rate_partner" class="pb-input" placeholder="300"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Senior Associate (€/hr)</label>
-            <input name="rate_senior_associate" class="dwf-input" placeholder="250"/>
+            <label class="pb-label">Senior Associate (€/hr)</label>
+            <input name="rate_senior_associate" class="pb-input" placeholder="250"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Associate (€/hr)</label>
-            <input name="rate_associate" class="dwf-input" placeholder="250"/>
+            <label class="pb-label">Associate (€/hr)</label>
+            <input name="rate_associate" class="pb-input" placeholder="250"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Solicitor (€/hr)</label>
-            <input name="rate_solicitor" class="dwf-input" placeholder="250"/>
+            <label class="pb-label">Solicitor (€/hr)</label>
+            <input name="rate_solicitor" class="pb-input" placeholder="250"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Paralegal (€/hr)</label>
-            <input name="rate_paralegal" class="dwf-input" placeholder="150"/>
+            <label class="pb-label">Paralegal (€/hr)</label>
+            <input name="rate_paralegal" class="pb-input" placeholder="150"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">VAT Rate (%)</label>
-            <input name="vat_rate" class="dwf-input" placeholder="23"/>
+            <label class="pb-label">VAT Rate (%)</label>
+            <input name="vat_rate" class="pb-input" placeholder="23"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Fixed Fee (€) <span class="text-slate-400 font-normal text-[10px]">— LOE Fixed only</span></label>
-            <input name="fixed_fee" class="dwf-input" placeholder="e.g. 2500"/>
+            <label class="pb-label">Fixed Fee (€) <span class="font-normal text-on-surface-variant text-[10px]">— LOE Fixed only</span></label>
+            <input name="fixed_fee" class="pb-input" placeholder="e.g. 2500"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── INCIDENT ─── -->
+      <!-- ── INCIDENT ── -->
       <div class="section-card" id="sec-incident">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">warning</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Incident Details</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">warning</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Incident Details</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Date of Incident</label>
-            <input name="incident_date" class="dwf-input" placeholder="DD Month YYYY"/>
+            <label class="pb-label">Date of Incident</label>
+            <input name="incident_date" class="pb-input" placeholder="DD Month YYYY"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Time of Incident</label>
-            <input name="incident_time" class="dwf-input" placeholder="e.g. 11:00"/>
+            <label class="pb-label">Time of Incident</label>
+            <input name="incident_time" class="pb-input" placeholder="e.g. 11:00"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Date of Notification</label>
-            <input name="date_notification" class="dwf-input" placeholder="e.g. TBC"/>
+            <label class="pb-label">Date of Notification</label>
+            <input name="date_notification" class="pb-input" placeholder="e.g. TBC"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Date of Instruction</label>
-            <input name="date_instruction" class="dwf-input" placeholder="Date instructed"/>
+            <label class="pb-label">Date of Instruction</label>
+            <input name="date_instruction" class="pb-input" placeholder="Date instructed"/>
           </div>
           <div class="col-span-8 space-y-1">
-            <label class="dwf-label">Incident Location</label>
-            <input name="incident_location" class="dwf-input" placeholder="Address / site of incident"/>
+            <label class="pb-label">Incident Location</label>
+            <input name="incident_location" class="pb-input" placeholder="Address / site of incident"/>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Injuries Description <span class="text-slate-400 font-normal">(RBA — be specific, no "soft tissue injury")</span></label>
-            <input name="injuries_description" class="dwf-input" placeholder="e.g. INJURIES TO LEFT SHOULDER AND NECK REGION"/>
+            <label class="pb-label">Injuries Description <span class="font-normal text-on-surface-variant">(RBA — be specific, no "soft tissue injury")</span></label>
+            <input name="injuries_description" class="pb-input" placeholder="e.g. INJURIES TO LEFT SHOULDER AND NECK REGION"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── PRELIMINARY REPORT ─── -->
+      <!-- ── PRELIMINARY REPORT ── -->
       <div class="section-card" id="sec-report">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">description</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Preliminary Report Content</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">description</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Preliminary Report Content</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-12">
-            <p class="text-xs text-slate-400 mb-1">Blank fields generate as placeholders in the report — fill in as much as available.</p>
-          </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Insurer / Loss Adjuster Contact</label>
-            <input name="insurer_contact_name" class="dwf-input" placeholder="e.g. Jane Doe"/>
-          </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Organisation</label>
-            <input name="insurer_contact_org" class="dwf-input" placeholder="e.g. Sedgwick / QBE / Zurich"/>
-          </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Contact Address</label>
-            <input name="insurer_contact_address" class="dwf-input" placeholder="Address of insurer contact"/>
-          </div>
-          <div class="col-span-6 space-y-1">
-            <label class="dwf-label">Contact Email</label>
-            <input name="insurer_contact_email" class="dwf-input" placeholder="e.g. contact@example.com"/>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Executive Summary</label>
-            <textarea name="executive_summary" class="dwf-input" rows="3" placeholder="Brief overview — who is the plaintiff, what happened, what proceedings have issued..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Incident Circumstances</label>
-            <textarea name="incident_circumstances" class="dwf-input" rows="3" placeholder="Detailed description of how the incident occurred..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">PIAB Details</label>
-            <textarea name="piab_details" class="dwf-input" rows="2" placeholder="PIAB Form A/B, authorisation number, date of authorisation..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Procedural Position</label>
-            <textarea name="procedural_position" class="dwf-input" rows="2" placeholder="Appearances entered, correspondence to date, current status..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Liability Analysis</label>
-            <textarea name="liability_section" class="dwf-input" rows="3" placeholder="Alleged breaches, insured's position, contributory negligence, indemnity issues..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Quantum / Injuries</label>
-            <textarea name="quantum_section" class="dwf-input" rows="3" placeholder="Injuries per summons, medical reports, guidelines bracket, loss of earnings..."></textarea>
-          </div>
-          <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Recommendations</label>
-            <textarea name="recommendations" class="dwf-input" rows="4" placeholder="One per line, e.g.:&#10;Enter Appearance&#10;Brief Counsel to draft Notice for Particulars&#10;Instruct Engineer at cost of €X plus VAT&#10;Obtain RBA certificate"></textarea>
-          </div>
-          <!-- Reserves -->
-          <div class="col-span-12 pt-2 border-t border-dwf-border">
-            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3">Reserves</p>
+            <p class="text-xs text-on-surface-variant mb-1">Blank fields generate as placeholders in the report — fill in as much as available.</p>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">General Damages (€)</label>
-            <input name="reserve_general_damages" class="dwf-input" placeholder="e.g. 20000"/>
+            <label class="pb-label">Insurer / Loss Adjuster Contact</label>
+            <input name="insurer_contact_name" class="pb-input" placeholder="e.g. Jane Doe"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Organisation</label>
+            <input name="insurer_contact_org" class="pb-input" placeholder="e.g. Sedgwick / QBE / Zurich"/>
+          </div>
+          <div class="col-span-8 space-y-1">
+            <label class="pb-label">Contact Address</label>
+            <input name="insurer_contact_address" class="pb-input" placeholder="Address of insurer contact"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Loss of Earnings (€)</label>
-            <input name="reserve_loss_of_earnings" class="dwf-input" placeholder="e.g. 15000"/>
+            <label class="pb-label">Contact Email</label>
+            <input name="insurer_contact_email" class="pb-input" placeholder="e.g. contact@example.com"/>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Executive Summary</label>
+            <textarea name="executive_summary" class="pb-input" rows="3" placeholder="Brief overview — who is the plaintiff, what happened, what proceedings have issued..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Incident Circumstances</label>
+            <textarea name="incident_circumstances" class="pb-input" rows="3" placeholder="Detailed description of how the incident occurred..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">PIAB Details</label>
+            <textarea name="piab_details" class="pb-input" rows="2" placeholder="PIAB Form A/B, authorisation number, date of authorisation..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Procedural Position</label>
+            <textarea name="procedural_position" class="pb-input" rows="2" placeholder="Appearances entered, correspondence to date, current status..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Liability Analysis</label>
+            <textarea name="liability_section" class="pb-input" rows="3" placeholder="Alleged breaches, insured's position, contributory negligence, indemnity issues..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Quantum / Injuries</label>
+            <textarea name="quantum_section" class="pb-input" rows="3" placeholder="Injuries per summons, medical reports, guidelines bracket, loss of earnings..."></textarea>
+          </div>
+          <div class="col-span-12 space-y-1">
+            <label class="pb-label">Recommendations</label>
+            <textarea name="recommendations" class="pb-input" rows="4" placeholder="One per line, e.g.:&#10;Enter Appearance&#10;Brief Counsel to draft Notice for Particulars&#10;Instruct Engineer at cost of €X plus VAT&#10;Obtain RBA certificate"></textarea>
+          </div>
+          <div class="col-span-12 pt-2">
+            <p class="pb-label mb-3">Reserves</p>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Special Damages (€)</label>
-            <input name="reserve_special_damages" class="dwf-input" placeholder="e.g. 5000"/>
+            <label class="pb-label">General Damages (€)</label>
+            <input name="reserve_general_damages" class="pb-input" placeholder="e.g. 20000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Total Claim Reserve (€)</label>
-            <input name="reserve_claim" class="dwf-input" placeholder="e.g. 40000"/>
+            <label class="pb-label">Loss of Earnings (€)</label>
+            <input name="reserve_loss_of_earnings" class="pb-input" placeholder="e.g. 15000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Defence Costs Reserve (€)</label>
-            <input name="reserve_defence_costs" class="dwf-input" placeholder="e.g. 8450"/>
+            <label class="pb-label">Special Damages (€)</label>
+            <input name="reserve_special_damages" class="pb-input" placeholder="e.g. 5000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Claimants' Costs Reserve (€)</label>
-            <input name="reserve_claimants_costs" class="dwf-input" placeholder="e.g. 25000"/>
+            <label class="pb-label">Total Claim Reserve (€)</label>
+            <input name="reserve_claim" class="pb-input" placeholder="e.g. 40000"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Claim Paid</label>
-            <input name="claim_paid" class="dwf-input" value="NIL"/>
+            <label class="pb-label">Defence Costs Reserve (€)</label>
+            <input name="reserve_defence_costs" class="pb-input" placeholder="e.g. 8450"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Claimants' Costs Reserve (€)</label>
+            <input name="reserve_claimants_costs" class="pb-input" placeholder="e.g. 25000"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Claim Paid</label>
+            <input name="claim_paid" class="pb-input" value="NIL"/>
           </div>
         </div>
       </div>
 
-      <!-- ─── BRIEF / INDEX ─── -->
+      <!-- ── BRIEF / INDEX ── -->
       <div class="section-card" id="sec-brief">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">menu_book</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Brief / Index to Brief Content</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">menu_book</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Brief / Index to Brief Content</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-12">
-            <div class="bg-dwf-cream border border-dwf-border rounded p-3 text-xs text-slate-500 mb-2">
-              Format each line as: <code class="bg-white px-1 rounded text-dwf-navy font-mono">Document Name | DD.MM.YYYY | Page numbers</code>
-              e.g. <code class="bg-white px-1 rounded text-dwf-navy font-mono">Personal Injuries Summons | 03.09.2020 | 1 - 12</code>
+            <div class="bg-surface-container-low rounded-lg p-3 text-xs text-on-surface-variant mb-2">
+              Format each line as: <code class="bg-surface-container-high px-1.5 py-0.5 rounded font-mono">Document Name | DD.MM.YYYY | Page numbers</code>
             </div>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label font-extrabold">Section A — Pleadings</label>
-            <textarea name="section_a_docs" class="dwf-input mono" rows="6"
+            <label class="pb-label font-extrabold">Section A — Pleadings</label>
+            <textarea name="section_a_docs" class="pb-input mono" rows="6"
               placeholder="Personal Injuries Summons | 03.09.2020 | 1 - 12&#10;Affidavit of Verification | 09.09.2020 | 13&#10;Memorandum of Appearance | 25.11.2020 | 14 - 15&#10;Notice for Particulars | 22.01.2021 | 16 - 19&#10;Replies to Particulars | 18.03.2021 | 20 - 25&#10;Personal Injuries Defence | 20.04.2022 | 26 - 29"></textarea>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label font-extrabold">Section B — Documentation / Reports</label>
-            <textarea name="section_b_docs" class="dwf-input mono" rows="4"
+            <label class="pb-label font-extrabold">Section B — Documentation / Reports</label>
+            <textarea name="section_b_docs" class="pb-input mono" rows="4"
               placeholder="Incident Report | DD.MM.YYYY | 1&#10;Witness Statement | DD.MM.YYYY | 2&#10;Photographs | N/A | 3&#10;Risk Assessment | DD.MM.YYYY | 4 - 8"></textarea>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label font-extrabold">Section C — Medical Reports / Records</label>
-            <textarea name="section_c_docs" class="dwf-input mono" rows="3"
+            <label class="pb-label font-extrabold">Section C — Medical Reports / Records</label>
+            <textarea name="section_c_docs" class="pb-input mono" rows="3"
               placeholder="Report of Dr [Name] | DD.MM.YYYY | 1 - 4&#10;Medical Records from [Hospital] | N/A | 5 - 12"></textarea>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label font-extrabold">Section D — Interpartes Correspondence</label>
-            <textarea name="section_d_docs" class="dwf-input mono" rows="2"
+            <label class="pb-label font-extrabold">Section D — Interpartes Correspondence</label>
+            <textarea name="section_d_docs" class="pb-input mono" rows="2"
               placeholder="Correspondence between Defence and Plaintiff's Solicitors | DD.MM.YYYY – DD.MM.YYYY | 1 - 45"></textarea>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Section E Title (optional)</label>
-            <input name="section_e_title" class="dwf-input" placeholder="e.g. Second Incident"/>
+            <label class="pb-label">Section E Title (optional)</label>
+            <input name="section_e_title" class="pb-input" placeholder="e.g. Second Incident"/>
           </div>
           <div class="col-span-8 space-y-1">
-            <label class="dwf-label">Section E Documents</label>
-            <textarea name="section_e_docs" class="dwf-input mono" rows="2" placeholder="Document Name | Date | Pages"></textarea>
+            <label class="pb-label">Section E Documents</label>
+            <textarea name="section_e_docs" class="pb-input mono" rows="2" placeholder="Document Name | Date | Pages"></textarea>
           </div>
         </div>
       </div>
 
-      <!-- ─── STANDARD LETTER ─── -->
+      <!-- ── STANDARD LETTER ── -->
       <div class="section-card" id="sec-letter">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">mail</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Standard Letter Details</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">mail</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Standard Letter Details</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Recipient Name</label>
-            <input name="recipient_name" class="dwf-input" placeholder="e.g. John Doe"/>
+            <label class="pb-label">Recipient Name</label>
+            <input name="recipient_name" class="pb-input" placeholder="e.g. John Doe"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Recipient Firm</label>
-            <input name="recipient_firm" class="dwf-input" placeholder="e.g. Doe & Co. Solicitors"/>
+            <label class="pb-label">Recipient Firm</label>
+            <input name="recipient_firm" class="pb-input" placeholder="e.g. Doe &amp; Co. Solicitors"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Recipient Address</label>
-            <input name="recipient_address" class="dwf-input" placeholder="Full address"/>
+            <label class="pb-label">Recipient Address</label>
+            <input name="recipient_address" class="pb-input" placeholder="Full address"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Letter Type / Subject</label>
-            <input name="letter_type" class="dwf-input" placeholder="e.g. Letter to Counsel — Brief"/>
+            <label class="pb-label">Letter Type / Subject</label>
+            <input name="letter_type" class="pb-input" placeholder="e.g. Letter to Counsel — Brief"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Salutation</label>
-            <input name="salutation" class="dwf-input" value="Dear Sirs"/>
+            <label class="pb-label">Salutation</label>
+            <input name="salutation" class="pb-input" value="Dear Sirs"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Closing</label>
-            <input name="closing" class="dwf-input" value="Yours sincerely,"/>
+            <label class="pb-label">Closing</label>
+            <input name="closing" class="pb-input" value="Yours sincerely,"/>
           </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Letter Body</label>
-            <textarea name="letter_body" class="dwf-input" rows="6"
+            <label class="pb-label">Letter Body</label>
+            <textarea name="letter_body" class="pb-input" rows="6"
               placeholder="Type or paste the body of the letter here. Separate paragraphs with a blank line."></textarea>
           </div>
         </div>
       </div>
 
-      <!-- ─── NOTICE FOR PARTICULARS ─── -->
+      <!-- ── ADDITIONAL PARTICULARS ── -->
       <div class="section-card" id="sec-nfp">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">format_list_numbered</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Additional Particulars</h2>
-            <span class="text-[10px] text-slate-400 font-normal ml-1">— Notice for Particulars extra items</span>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">format_list_numbered</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Additional Particulars</h2>
+            <span class="text-[10px] text-on-surface-variant font-normal">— Notice for Particulars extra items</span>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 hidden">
-          <p class="text-xs text-slate-400 mb-3">12 standard particulars are pre-populated. Add any extra case-specific ones below — one per line.</p>
-          <textarea name="custom_particulars" class="dwf-input" rows="4"
+          <p class="text-xs text-on-surface-variant mb-3">12 standard particulars are pre-populated. Add any extra case-specific ones below — one per line.</p>
+          <textarea name="custom_particulars" class="pb-input" rows="4"
             placeholder="e.g. Whether the Plaintiff received manual handling training prior to the alleged incident and if so, provide full details."></textarea>
         </div>
       </div>
 
-      <!-- ─── PAGE SPACING ─── -->
+      <!-- ── PAGE SPACING ── -->
       <div class="section-card" id="sec-branding">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">vertical_distribute</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Page Spacing</h2>
-            <span class="text-[10px] text-slate-400 font-normal ml-1">— Header &amp; footer margin for pre-printed letterhead</span>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">vertical_distribute</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Page Spacing</h2>
+            <span class="text-[10px] text-on-surface-variant font-normal">— Header &amp; footer margin for pre-printed letterhead</span>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-4 hidden">
-          <p class="text-xs text-slate-400 mb-4">Set the top and bottom margins (in cm) to leave space for your firm's pre-printed letterhead and footer. Default is 2.5 cm.</p>
+          <p class="text-xs text-on-surface-variant mb-4">Set the top and bottom margins (in cm) to leave space for your firm's pre-printed letterhead and footer. Default is 2.5 cm.</p>
           <div class="grid grid-cols-12 gap-5">
             <div class="col-span-6 space-y-2">
-              <label class="dwf-label">Header Space (cm) <span class="font-normal text-slate-400">— top margin</span></label>
+              <label class="pb-label">Header Space (cm) <span class="font-normal text-on-surface-variant">— top margin</span></label>
               <div class="flex items-center gap-3">
                 <input type="range" name="header_space" min="1" max="8" step="0.5" value="2.5"
-                  class="flex-1 accent-dwf-pink" id="headerRange"
+                  class="flex-1 accent-secondary" id="headerRange"
                   oninput="document.getElementById('headerVal').textContent=this.value"/>
-                <span id="headerVal" class="text-sm font-bold text-dwf-pink w-10 text-right">2.5</span>
-                <span class="text-xs text-slate-400">cm</span>
+                <span id="headerVal" class="text-sm font-bold text-secondary w-10 text-right">2.5</span>
+                <span class="text-xs text-on-surface-variant">cm</span>
               </div>
             </div>
             <div class="col-span-6 space-y-2">
-              <label class="dwf-label">Footer Space (cm) <span class="font-normal text-slate-400">— bottom margin</span></label>
+              <label class="pb-label">Footer Space (cm) <span class="font-normal text-on-surface-variant">— bottom margin</span></label>
               <div class="flex items-center gap-3">
                 <input type="range" name="footer_space" min="1" max="8" step="0.5" value="2.5"
-                  class="flex-1 accent-dwf-pink" id="footerRange"
+                  class="flex-1 accent-secondary" id="footerRange"
                   oninput="document.getElementById('footerVal').textContent=this.value"/>
-                <span id="footerVal" class="text-sm font-bold text-dwf-pink w-10 text-right">2.5</span>
-                <span class="text-xs text-slate-400">cm</span>
+                <span id="footerVal" class="text-sm font-bold text-secondary w-10 text-right">2.5</span>
+                <span class="text-xs text-on-surface-variant">cm</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ─── LITIGATION DOCUMENTS ─── -->
+      <!-- ── LITIGATION DOCUMENTS ── -->
       <div class="section-card" id="sec-litigation">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">gavel</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Litigation Documents</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">account_balance</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Litigation Documents</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 grid grid-cols-12 gap-5 hidden">
           <div class="col-span-12">
-            <p class="text-xs text-slate-400 mb-1">Used for: Notice of Motion, Opposition, Reply, Mediation Brief, Ex Parte Application. Fields below feed all litigation document types — leave unused fields blank.</p>
-          </div>
-          <!-- Row 1 -->
-          <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Return / Hearing Date</label>
-            <input name="lit_return_date" class="dwf-input" placeholder="e.g. 14 April 2026"/>
+            <p class="text-xs text-on-surface-variant mb-1">Used for: Notice of Motion, Opposition, Reply, Mediation Brief, Ex Parte Application. Leave unused fields blank.</p>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Mediation Date <span class="text-slate-400 font-normal text-[10px]">— Mediation Brief</span></label>
-            <input name="lit_mediation_date" class="dwf-input" placeholder="e.g. 20 May 2026"/>
+            <label class="pb-label">Return / Hearing Date</label>
+            <input name="lit_return_date" class="pb-input" placeholder="e.g. 14 April 2026"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Mediator Name</label>
-            <input name="lit_mediator_name" class="dwf-input" placeholder="e.g. John Doe SC"/>
-          </div>
-          <!-- Row 2 -->
-          <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Deponent Name <span class="text-slate-400 font-normal text-[10px]">— Ex Parte Affidavit</span></label>
-            <input name="lit_deponent_name" class="dwf-input" placeholder="e.g. Jane Doe"/>
+            <label class="pb-label">Mediation Date <span class="font-normal text-on-surface-variant text-[10px]">— Mediation Brief</span></label>
+            <input name="lit_mediation_date" class="pb-input" placeholder="e.g. 20 May 2026"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Deponent Capacity</label>
-            <input name="lit_deponent_capacity" class="dwf-input" placeholder="e.g. Solicitor"/>
+            <label class="pb-label">Mediator Name</label>
+            <input name="lit_mediator_name" class="pb-input" placeholder="e.g. John Doe SC"/>
           </div>
           <div class="col-span-4 space-y-1">
-            <label class="dwf-label">Settlement Authority <span class="text-slate-400 font-normal text-[10px]">— Mediation (W/P)</span></label>
-            <input name="lit_settlement_range" class="dwf-input" placeholder="e.g. Up to €25,000 (without prejudice)"/>
+            <label class="pb-label">Deponent Name <span class="font-normal text-on-surface-variant text-[10px]">— Ex Parte Affidavit</span></label>
+            <input name="lit_deponent_name" class="pb-input" placeholder="e.g. Jane Doe"/>
           </div>
-          <!-- Relief Sought -->
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Deponent Capacity</label>
+            <input name="lit_deponent_capacity" class="pb-input" placeholder="e.g. Solicitor"/>
+          </div>
+          <div class="col-span-4 space-y-1">
+            <label class="pb-label">Settlement Authority <span class="font-normal text-on-surface-variant text-[10px]">— Mediation (W/P)</span></label>
+            <input name="lit_settlement_range" class="pb-input" placeholder="e.g. Up to €25,000 (without prejudice)"/>
+          </div>
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Relief Sought <span class="text-slate-400 font-normal">(one item per line — used in Motion &amp; Ex Parte)</span></label>
-            <textarea name="lit_relief_sought" class="dwf-input" rows="3"
+            <label class="pb-label">Relief Sought <span class="font-normal text-on-surface-variant">(one item per line — Motion &amp; Ex Parte)</span></label>
+            <textarea name="lit_relief_sought" class="pb-input" rows="3"
               placeholder="An Order for Liberty to Inspect the locus in quo&#10;An Order for Discovery of Documents&#10;Such further or other relief as this Honourable Court deems fit&#10;Costs"></textarea>
           </div>
-          <!-- Grounds -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Grounds <span class="text-slate-400 font-normal">(one ground per line — used in Motion, Opposition, Reply, Ex Parte)</span></label>
-            <textarea name="lit_grounds" class="dwf-input" rows="4"
+            <label class="pb-label">Grounds <span class="font-normal text-on-surface-variant">(one per line — Motion, Opposition, Reply, Ex Parte)</span></label>
+            <textarea name="lit_grounds" class="pb-input" rows="4"
               placeholder="The Defendant is entitled to inspect the locus in quo pursuant to Order 31 Rule 18 of the Rules of the Superior Courts&#10;The inspection is necessary for the fair disposal of the proceedings&#10;No prejudice will be suffered by the Plaintiff by reason of such inspection&#10;It is just and convenient that such an Order be made"></textarea>
           </div>
-          <!-- Opposition-specific grounds -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Opposition Grounds <span class="text-slate-400 font-normal">(leave blank to reuse Grounds above — Notice of Opposition only)</span></label>
-            <textarea name="lit_opposition_grounds" class="dwf-input" rows="3"
+            <label class="pb-label">Opposition Grounds <span class="font-normal text-on-surface-variant">(leave blank to reuse Grounds above — Notice of Opposition only)</span></label>
+            <textarea name="lit_opposition_grounds" class="pb-input" rows="3"
               placeholder="The application is premature&#10;No good reason has been advanced for the relief sought&#10;The Plaintiff would suffer prejudice..."></textarea>
           </div>
-          <!-- Reply-specific grounds -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Reply Points <span class="text-slate-400 font-normal">(leave blank to reuse Grounds above — Reply only)</span></label>
-            <textarea name="lit_reply_grounds" class="dwf-input" rows="3"
+            <label class="pb-label">Reply Points <span class="font-normal text-on-surface-variant">(leave blank to reuse Grounds above — Reply only)</span></label>
+            <textarea name="lit_reply_grounds" class="pb-input" rows="3"
               placeholder="The Plaintiff's Opposition mischaracterises the basis of the application&#10;The grounds advanced in the Notice of Motion remain valid and are not displaced..."></textarea>
           </div>
-          <!-- Ex Parte urgency -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Reason for Ex Parte Relief <span class="text-slate-400 font-normal">(why notice cannot be given — Ex Parte only)</span></label>
-            <textarea name="lit_urgent_reasons" class="dwf-input" rows="2"
+            <label class="pb-label">Reason for Ex Parte Relief <span class="font-normal text-on-surface-variant">(why notice cannot be given — Ex Parte only)</span></label>
+            <textarea name="lit_urgent_reasons" class="pb-input" rows="2"
               placeholder="The Applicant apprehends that giving notice of this application would render it nugatory in that the Respondent would take steps to..."></textarea>
           </div>
-          <!-- Mediation position -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Client's Position Statement <span class="text-slate-400 font-normal">(Mediation Brief — overrides Liability field if filled)</span></label>
-            <textarea name="lit_position_statement" class="dwf-input" rows="3"
+            <label class="pb-label">Client's Position Statement <span class="font-normal text-on-surface-variant">(Mediation Brief — overrides Liability field if filled)</span></label>
+            <textarea name="lit_position_statement" class="pb-input" rows="3"
               placeholder="The Defendant denies liability in its entirety. The Plaintiff was the author of his/her own misfortune..."></textarea>
           </div>
-          <!-- Key Issues -->
           <div class="col-span-12 space-y-1">
-            <label class="dwf-label">Key Issues in Dispute <span class="text-slate-400 font-normal">(Mediation Brief — one per line)</span></label>
-            <textarea name="lit_key_issues" class="dwf-input" rows="3"
+            <label class="pb-label">Key Issues in Dispute <span class="font-normal text-on-surface-variant">(Mediation Brief — one per line)</span></label>
+            <textarea name="lit_key_issues" class="pb-input" rows="3"
               placeholder="Liability&#10;Quantum&#10;Contributory Negligence&#10;Loss of Earnings&#10;Special Damages"></textarea>
           </div>
         </div>
       </div>
 
-      <!-- ─── BILLING / FEE NOTE ─── -->
+      <!-- ── BILLING / FEE NOTE ── -->
       <div class="section-card" id="sec-billing">
         <div class="section-header" onclick="toggleSection(this)">
-          <div class="flex items-center space-x-3">
-            <span class="material-symbols-outlined text-dwf-pink text-[18px]">receipt_long</span>
-            <h2 class="font-bold text-[#1c1c19] text-sm">Billing / Professional Fee Note</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-secondary rounded-full shrink-0"></span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">receipt_long</span>
+            <h2 class="font-headline font-bold text-primary text-sm">Billing / Professional Fee Note</h2>
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px] chevron transition-transform rotate-[-90deg]">expand_more</span>
         </div>
         <div class="section-body p-6 pt-3 hidden">
           <!-- Bill metadata -->
           <div class="grid grid-cols-12 gap-5 mb-6">
             <div class="col-span-4 space-y-1">
-              <label class="dwf-label">Bill Number</label>
-              <input name="bill_no" class="dwf-input" placeholder="Auto-generated if blank"/>
+              <label class="pb-label">Bill Number</label>
+              <input name="bill_no" class="pb-input" placeholder="Auto-generated if blank"/>
             </div>
             <div class="col-span-4 space-y-1">
-              <label class="dwf-label">Bill Date</label>
-              <input name="bill_date" class="dwf-input" placeholder="e.g. 24 March 2026"/>
+              <label class="pb-label">Bill Date</label>
+              <input name="bill_date" class="pb-input" placeholder="e.g. 24 March 2026"/>
             </div>
             <div class="col-span-4 space-y-1">
-              <label class="dwf-label">Period of Services</label>
-              <input name="billing_period" class="dwf-input" placeholder="e.g. January – March 2026"/>
+              <label class="pb-label">Period of Services</label>
+              <input name="billing_period" class="pb-input" placeholder="e.g. January – March 2026"/>
             </div>
           </div>
 
           <!-- TIME ENTRIES -->
-          <div class="mb-4">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider">Time Entries</h3>
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Time Entries</h3>
               <button type="button" onclick="addTimeEntry()"
-                class="flex items-center gap-1 px-3 py-1 rounded border border-dwf-pink text-dwf-pink text-[11px] font-semibold hover:bg-dwf-pink hover:text-white transition-all">
+                class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary/10 text-secondary text-[11px] font-bold hover:bg-secondary/20 transition-all">
                 <span class="material-symbols-outlined text-[14px]">add</span> Add Row
               </button>
             </div>
-            <!-- Header -->
-            <div class="grid grid-cols-12 gap-1 px-2 py-1 bg-dwf-navy rounded-t text-white text-[10px] font-bold uppercase tracking-wider">
-              <div class="col-span-2">Date</div>
-              <div class="col-span-2">Fee Earner</div>
-              <div class="col-span-5">Description of Work</div>
-              <div class="col-span-1 text-center">Hrs</div>
-              <div class="col-span-1 text-right">Rate €</div>
-              <div class="col-span-1 text-right"></div>
+            <div class="rounded-xl overflow-hidden bg-surface-container-lowest">
+              <div class="grid grid-cols-12 gap-1 px-3 py-2 bg-surface-container-low text-[10px] font-black uppercase tracking-wider text-on-surface-variant">
+                <div class="col-span-2">Date</div>
+                <div class="col-span-2">Fee Earner</div>
+                <div class="col-span-5">Description of Work</div>
+                <div class="col-span-1 text-center">Hrs</div>
+                <div class="col-span-1 text-right">Rate €</div>
+                <div class="col-span-1"></div>
+              </div>
+              <div id="timeEntries" class="p-2 space-y-1">
+                <div class="te-row grid grid-cols-12 gap-1 items-center">
+                  <input name="te_date_0" class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+                  <input name="te_earner_0" class="te-input col-span-2" placeholder="e.g. Partner"/>
+                  <input name="te_desc_0" class="te-input col-span-5" placeholder="Reviewing pleadings, advising on strategy..."/>
+                  <input name="te_hours_0" class="te-input col-span-1 text-center" placeholder="2.5" oninput="calcRow(this)"/>
+                  <input name="te_rate_0" class="te-input col-span-1 text-right" placeholder="300" oninput="calcRow(this)"/>
+                  <div class="col-span-1 text-right text-[11px] font-semibold text-primary te-amt px-1">€0</div>
+                </div>
+                <div class="te-row grid grid-cols-12 gap-1 items-center">
+                  <input name="te_date_1" class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+                  <input name="te_earner_1" class="te-input col-span-2" placeholder="e.g. Associate"/>
+                  <input name="te_desc_1" class="te-input col-span-5" placeholder="Drafting Notice for Particulars..."/>
+                  <input name="te_hours_1" class="te-input col-span-1 text-center" placeholder="1.5" oninput="calcRow(this)"/>
+                  <input name="te_rate_1" class="te-input col-span-1 text-right" placeholder="250" oninput="calcRow(this)"/>
+                  <div class="col-span-1 text-right text-[11px] font-semibold text-primary te-amt px-1">€0</div>
+                </div>
+                <div class="te-row grid grid-cols-12 gap-1 items-center">
+                  <input name="te_date_2" class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+                  <input name="te_earner_2" class="te-input col-span-2" placeholder="e.g. Paralegal"/>
+                  <input name="te_desc_2" class="te-input col-span-5" placeholder="Filing, correspondence, scheduling..."/>
+                  <input name="te_hours_2" class="te-input col-span-1 text-center" placeholder="3.0" oninput="calcRow(this)"/>
+                  <input name="te_rate_2" class="te-input col-span-1 text-right" placeholder="150" oninput="calcRow(this)"/>
+                  <div class="col-span-1 text-right text-[11px] font-semibold text-primary te-amt px-1">€0</div>
+                </div>
+              </div>
             </div>
-            <!-- Rows container -->
-            <div id="timeEntries" class="space-y-1 mt-1">
-              <!-- 3 default rows -->
-              <div class="te-row grid grid-cols-12 gap-1 items-center">
-                <input name="te_date_0" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-                <input name="te_earner_0" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Partner"/>
-                <input name="te_desc_0" class="dwf-input col-span-5 text-[11px]" placeholder="Reviewing pleadings, advising on strategy..."/>
-                <input name="te_hours_0" class="dwf-input col-span-1 text-[11px] text-center" placeholder="2.5" oninput="calcRow(this)"/>
-                <input name="te_rate_0" class="dwf-input col-span-1 text-[11px] text-right" placeholder="300" oninput="calcRow(this)"/>
-                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
-              </div>
-              <div class="te-row grid grid-cols-12 gap-1 items-center">
-                <input name="te_date_1" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-                <input name="te_earner_1" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Associate"/>
-                <input name="te_desc_1" class="dwf-input col-span-5 text-[11px]" placeholder="Drafting Notice for Particulars..."/>
-                <input name="te_hours_1" class="dwf-input col-span-1 text-[11px] text-center" placeholder="1.5" oninput="calcRow(this)"/>
-                <input name="te_rate_1" class="dwf-input col-span-1 text-[11px] text-right" placeholder="250" oninput="calcRow(this)"/>
-                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
-              </div>
-              <div class="te-row grid grid-cols-12 gap-1 items-center">
-                <input name="te_date_2" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-                <input name="te_earner_2" class="dwf-input col-span-2 text-[11px]" placeholder="e.g. Paralegal"/>
-                <input name="te_desc_2" class="dwf-input col-span-5 text-[11px]" placeholder="Filing, correspondence, scheduling..."/>
-                <input name="te_hours_2" class="dwf-input col-span-1 text-[11px] text-center" placeholder="3.0" oninput="calcRow(this)"/>
-                <input name="te_rate_2" class="dwf-input col-span-1 text-[11px] text-right" placeholder="150" oninput="calcRow(this)"/>
-                <div class="col-span-1 text-right text-[11px] font-semibold text-dwf-navy te-amt px-1">€0</div>
-              </div>
-            </div>
-            <!-- Time charges subtotal -->
             <div class="flex justify-end mt-2 pr-1">
-              <span class="text-[11px] text-slate-500 mr-2">Professional Charges Subtotal:</span>
-              <span id="teSubtotal" class="text-[12px] font-bold text-dwf-navy">€0.00</span>
+              <span class="text-[11px] text-on-surface-variant mr-2">Professional Charges Subtotal:</span>
+              <span id="teSubtotal" class="text-[12px] font-bold text-primary">€0.00</span>
             </div>
           </div>
 
           <!-- DISBURSEMENTS -->
-          <div class="mb-4">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider">Disbursements</h3>
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Disbursements</h3>
               <button type="button" onclick="addDisbRow()"
-                class="flex items-center gap-1 px-3 py-1 rounded border border-dwf-pink text-dwf-pink text-[11px] font-semibold hover:bg-dwf-pink hover:text-white transition-all">
+                class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary/10 text-secondary text-[11px] font-bold hover:bg-secondary/20 transition-all">
                 <span class="material-symbols-outlined text-[14px]">add</span> Add Row
               </button>
             </div>
-            <div class="grid grid-cols-12 gap-1 px-2 py-1 bg-dwf-navy rounded-t text-white text-[10px] font-bold uppercase tracking-wider">
-              <div class="col-span-2">Date</div>
-              <div class="col-span-8">Description</div>
-              <div class="col-span-2 text-right">Amount €</div>
-            </div>
-            <div id="disbRows" class="space-y-1 mt-1">
-              <div class="disb-row grid grid-cols-12 gap-1 items-center">
-                <input name="disb_date_0" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-                <input name="disb_desc_0" class="dwf-input col-span-8 text-[11px]" placeholder="e.g. Counsel's fee — Advice on Proofs"/>
-                <input name="disb_amount_0" class="dwf-input col-span-2 text-[11px] text-right" placeholder="2500" oninput="calcDisb()"/>
+            <div class="rounded-xl overflow-hidden bg-surface-container-lowest">
+              <div class="grid grid-cols-12 gap-1 px-3 py-2 bg-surface-container-low text-[10px] font-black uppercase tracking-wider text-on-surface-variant">
+                <div class="col-span-2">Date</div>
+                <div class="col-span-8">Description</div>
+                <div class="col-span-2 text-right">Amount €</div>
               </div>
-              <div class="disb-row grid grid-cols-12 gap-1 items-center">
-                <input name="disb_date_1" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-                <input name="disb_desc_1" class="dwf-input col-span-8 text-[11px]" placeholder="e.g. Engineer's report fee"/>
-                <input name="disb_amount_1" class="dwf-input col-span-2 text-[11px] text-right" placeholder="800" oninput="calcDisb()"/>
+              <div id="disbRows" class="p-2 space-y-1">
+                <div class="disb-row grid grid-cols-12 gap-1 items-center">
+                  <input name="disb_date_0" class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+                  <input name="disb_desc_0" class="te-input col-span-8" placeholder="e.g. Counsel's fee — Advice on Proofs"/>
+                  <input name="disb_amount_0" class="te-input col-span-2 text-right" placeholder="2500" oninput="calcDisb()"/>
+                </div>
+                <div class="disb-row grid grid-cols-12 gap-1 items-center">
+                  <input name="disb_date_1" class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+                  <input name="disb_desc_1" class="te-input col-span-8" placeholder="e.g. Engineer's report fee"/>
+                  <input name="disb_amount_1" class="te-input col-span-2 text-right" placeholder="800" oninput="calcDisb()"/>
+                </div>
               </div>
             </div>
             <div class="flex justify-end mt-2 pr-1">
-              <span class="text-[11px] text-slate-500 mr-2">Disbursements Subtotal:</span>
-              <span id="disbSubtotal" class="text-[12px] font-bold text-dwf-navy">€0.00</span>
+              <span class="text-[11px] text-on-surface-variant mr-2">Disbursements Subtotal:</span>
+              <span id="disbSubtotal" class="text-[12px] font-bold text-primary">€0.00</span>
             </div>
           </div>
 
           <!-- TOTALS PREVIEW -->
-          <div class="bg-white border border-dwf-border rounded-lg p-4 space-y-2">
-            <h3 class="text-[11px] font-bold text-[#2b3a50] uppercase tracking-wider mb-3">Invoice Preview</h3>
-            <div class="flex justify-between text-[12px]">
-              <span class="text-slate-600">Professional Charges</span>
+          <div class="bg-surface-container-low rounded-xl p-5 space-y-3">
+            <h3 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Invoice Preview</h3>
+            <div class="flex justify-between text-sm">
+              <span class="text-on-surface-variant">Professional Charges</span>
               <span id="prevCharges" class="font-medium">€0.00</span>
             </div>
-            <div class="flex justify-between text-[12px]">
-              <span class="text-slate-600">VAT @ <span id="vatRateLabel">23</span>%</span>
+            <div class="flex justify-between text-sm">
+              <span class="text-on-surface-variant">VAT @ <span id="vatRateLabel">23</span>%</span>
               <span id="prevVat" class="font-medium">€0.00</span>
             </div>
-            <div class="flex justify-between text-[12px]">
-              <span class="text-slate-600">Disbursements</span>
+            <div class="flex justify-between text-sm">
+              <span class="text-on-surface-variant">Disbursements</span>
               <span id="prevDisb" class="font-medium">€0.00</span>
             </div>
-            <div class="border-t border-dwf-border pt-2 flex justify-between">
-              <span class="text-[13px] font-bold text-dwf-navy">TOTAL NOW DUE</span>
-              <span id="prevTotal" class="text-[14px] font-bold text-dwf-pink">€0.00</span>
+            <div class="pt-3 flex justify-between" style="border-top: 1px solid rgba(195,198,207,0.4)">
+              <span class="text-sm font-bold text-primary">TOTAL NOW DUE</span>
+              <span id="prevTotal" class="text-base font-bold text-secondary">€0.00</span>
             </div>
           </div>
         </div>
@@ -967,146 +978,149 @@
     </div>
   </main>
 
-  <!-- ═══ RIGHT PANEL ═══ -->
-  <aside class="w-[300px] bg-dwf-cream2 h-full flex flex-col shrink-0 overflow-y-auto">
-    <div class="p-5 flex-1 space-y-5">
-      <div>
-        <h2 class="text-[16px] font-bold text-[#2b3a50]">Generate Documents</h2>
-        <p class="text-[13px] text-[#6b6460] mt-1">Select documents to include in your bundle.</p>
-      </div>
+  <!-- RIGHT PANEL — Output Builder -->
+  <aside class="w-[300px] shrink-0 bg-surface-container-lowest h-full flex flex-col fixed right-0 top-16 overflow-y-auto" style="box-shadow: -4px 0 20px rgba(25,28,29,0.05);">
+    <div class="p-5 pb-3 border-b border-outline-variant/15">
+      <h2 class="font-headline text-base font-bold text-primary">Output Builder</h2>
+      <p class="text-xs text-on-surface-variant mt-0.5">Select documents to generate.</p>
+    </div>
 
-      <!-- LETTERS OF ENGAGEMENT -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Letters of Engagement</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
-        </div>
-        {% for key, label in [('loe_hourly','LOE — Hourly Rate'),('loe_fixed','LOE — Fixed Fee')] %}
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
-        </label>
-        {% endfor %}
-      </section>
+    <div class="flex-1 overflow-y-auto px-4 py-4 space-y-4">
 
-      <!-- REPORTS -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Reports</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">1 item</span>
-        </div>
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="preliminary_report" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">Preliminary Report</span>
-        </label>
-      </section>
-
-      <!-- BRIEFS & INDEXES -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Briefs &amp; Indexes</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
-        </div>
-        {% for key, label in [('brief_cover','Brief Cover Page'),('index_brief','Index to Brief')] %}
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
-        </label>
-        {% endfor %}
-      </section>
-
-      <!-- PLEADINGS -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Pleadings</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">3 items</span>
-        </div>
-        {% for key, label in [('appearance_hc','Appearance — High Court'),('appearance_cc','Appearance — Circuit Court'),('notice_particulars','Notice for Particulars')] %}
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
-        </label>
-        {% endfor %}
-      </section>
-
-      <!-- FORMS & LETTERS -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Forms &amp; Letters</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">2 items</span>
-        </div>
-        {% for key, label in [('rba_form','RBA Form'),('standard_letter','Standard Letter')] %}
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
-        </label>
-        {% endfor %}
-      </section>
-
-      <!-- LITIGATION LIFECYCLE -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Litigation Lifecycle</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">5 items</span>
-        </div>
-        {% for key, label in [
-          ('motion','Notice of Motion'),
-          ('opposition','Notice of Opposition'),
-          ('reply','Reply'),
-          ('mediation_brief','Mediation Position Paper'),
-          ('ex_parte','Ex Parte + Grounding Affidavit')
-        ] %}
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="{{ key }}" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">{{ label }}</span>
-        </label>
-        {% endfor %}
-      </section>
-
-      <!-- BILLING -->
-      <section>
-        <div class="flex justify-between items-center border-b border-dwf-border pb-1 mb-1">
-          <h3 class="text-[11px] font-bold text-[#6b6460] uppercase tracking-wider">Billing</h3>
-          <span class="text-[10px] text-[#906f73] font-medium">1 item</span>
-        </div>
-        <label class="flex items-center h-[36px] px-3 gap-3 rounded-md hover:bg-dwf-cream cursor-pointer transition-colors group">
-          <input type="checkbox" name="documents" value="fee_note" class="pink-accent w-4 h-4 shrink-0 rounded border-[#906f73] focus:ring-0"/>
-          <span class="text-[13px] text-[#323232] font-medium group-hover:text-[#1c1c19]">Professional Fee Note</span>
-        </label>
-      </section>
-
-      <!-- Select / Clear -->
       <div class="flex gap-2">
         <button type="button" id="selectAll"
-          class="flex-1 py-1.5 border border-dwf-border text-[12px] text-[#5b3f43] font-medium hover:bg-dwf-cream transition-all rounded">
+          class="flex-1 py-1.5 text-[11px] font-bold text-secondary bg-secondary/5 hover:bg-secondary/10 rounded-lg transition-all">
           Select All
         </button>
         <button type="button" id="clearAll"
-          class="flex-1 py-1.5 border border-dwf-border text-[12px] text-[#5b3f43] font-medium hover:bg-dwf-cream transition-all rounded">
+          class="flex-1 py-1.5 text-[11px] font-bold text-on-surface-variant bg-surface-container-low hover:bg-surface-container rounded-lg transition-all">
           Clear All
         </button>
       </div>
 
+      <!-- LETTERS OF ENGAGEMENT -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Letters of Engagement</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="loe_hourly" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">LOE — Hourly Rate</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="loe_fixed" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">LOE — Fixed Fee</span>
+        </label>
+      </div>
+
+      <!-- REPORTS -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Reports</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="preliminary_report" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Preliminary Report</span>
+        </label>
+      </div>
+
+      <!-- BRIEFS & INDEXES -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Briefs &amp; Indexes</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="brief_cover" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Brief Cover Page</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="index_brief" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Index to Brief</span>
+        </label>
+      </div>
+
+      <!-- PLEADINGS -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Pleadings</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="appearance_hc" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Appearance — High Court</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="appearance_cc" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Appearance — Circuit Court</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="notice_particulars" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Notice for Particulars</span>
+        </label>
+      </div>
+
+      <!-- FORMS & LETTERS -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Forms &amp; Letters</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="rba_form" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">RBA Form</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="standard_letter" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Standard Letter</span>
+        </label>
+      </div>
+
+      <!-- LITIGATION LIFECYCLE -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Litigation Lifecycle</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="motion" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Notice of Motion</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="opposition" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Notice of Opposition</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="reply" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Reply</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="mediation_brief" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Mediation Position Paper</span>
+        </label>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="ex_parte" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Ex Parte + Grounding Affidavit</span>
+        </label>
+      </div>
+
+      <!-- BILLING -->
+      <div>
+        <p class="text-[9px] font-bold text-on-surface-variant uppercase tracking-[0.08em] mb-1 px-1">Billing</p>
+        <label class="flex items-center gap-3 h-10 px-3 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors group">
+          <input type="checkbox" name="documents" value="fee_note" class="w-4 h-4 shrink-0 rounded accent-secondary focus:ring-0"/>
+          <span class="text-sm text-on-surface group-hover:text-primary">Professional Fee Note</span>
+        </label>
+      </div>
+
       <!-- Tips -->
-      <div class="bg-white p-4 rounded-lg border-l-[3px] border-dwf-pink" style="box-shadow:0 12px 32px -4px rgba(50,50,50,0.06)">
+      <div class="bg-secondary/5 rounded-xl p-4 mt-2">
         <div class="flex items-center gap-2 mb-2">
-          <span class="material-symbols-outlined text-[18px] text-dwf-pink" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">lightbulb</span>
-          <h4 class="text-[12.5px] font-bold text-dwf-pink">Tips</h4>
+          <span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">lightbulb</span>
+          <h4 class="text-[10px] font-bold text-secondary uppercase tracking-wider">Tips</h4>
         </div>
-        <ul class="text-[12px] text-[#323232] leading-[1.6] space-y-2">
-          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Fill <strong>Matter</strong>, <strong>Plaintiff</strong> &amp; <strong>Personnel</strong> first — used in all documents.</span></li>
-          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Brief Index: enter as <code class="px-1.5 py-0.5 rounded bg-dwf-cream text-[#2b3a50] font-mono">Name | Date | Pages</code></span></li>
-          <li class="flex gap-2"><span class="text-dwf-pink">•</span><span>Blank fields get <code class="px-1.5 py-0.5 rounded bg-dwf-cream text-[#2b3a50] font-mono">[TBC]</code> placeholders.</span></li>
+        <ul class="text-xs text-on-surface-variant leading-relaxed space-y-1.5">
+          <li class="flex gap-2"><span class="text-secondary shrink-0">·</span><span>Fill <strong class="text-on-surface">Matter</strong>, <strong class="text-on-surface">Plaintiff</strong> &amp; <strong class="text-on-surface">Personnel</strong> first — used in all documents.</span></li>
+          <li class="flex gap-2"><span class="text-secondary shrink-0">·</span><span>Brief Index: enter as <code class="px-1 rounded bg-surface-container-high font-mono">Name | Date | Pages</code></span></li>
+          <li class="flex gap-2"><span class="text-secondary shrink-0">·</span><span>Blank fields get <code class="px-1 rounded bg-surface-container-high font-mono">[TBC]</code> placeholders.</span></li>
         </ul>
       </div>
+
     </div>
 
     <!-- CTA -->
-    <div class="p-5 border-t border-dwf-border">
+    <div class="p-4 border-t border-outline-variant/15 shrink-0">
+      <div class="text-center mb-3">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant" id="selectedCount">0 of 16 selected</span>
+      </div>
       <button type="submit" id="generateBtn"
-        class="w-full h-[44px] bg-dwf-pink hover:bg-dwf-pink2 text-white font-bold text-[13px] tracking-widest flex items-center justify-center gap-3 rounded-md transition-all active:scale-[0.98] hover:-translate-y-0.5 shadow-lg shadow-dwf-pink/20 hover:shadow-dwf-pink/40">
+        class="w-full h-11 bg-gradient-to-b from-primary to-primary-container text-white font-bold text-[12px] tracking-widest flex items-center justify-center gap-2 rounded-lg transition-all active:scale-[0.98] hover:opacity-90 shadow-lg shadow-primary/20">
         <span id="btnText">GENERATE &amp; DOWNLOAD</span>
-        <span id="btnIcon" class="material-symbols-outlined text-[20px]">download</span>
+        <span id="btnIcon" class="material-symbols-outlined text-[18px]">download</span>
         <span id="btnSpinner" class="hidden">
           <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -1114,9 +1128,8 @@
           </svg>
         </span>
       </button>
-      <!-- Outlook button -->
       <button type="button" id="outlookBtn"
-        class="w-full h-[44px] mt-2 bg-[#0072C6] hover:bg-[#005a9e] text-white font-bold text-[12px] tracking-widest flex items-center justify-center gap-2 rounded-md transition-all active:scale-[0.98] hover:-translate-y-0.5 shadow-md shadow-blue-900/20">
+        class="w-full h-11 mt-2 bg-[#0072C6] hover:bg-[#005a9e] text-white font-bold text-[12px] tracking-widest flex items-center justify-center gap-2 rounded-lg transition-all active:scale-[0.98] hover:opacity-90">
         <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M24 7.387v13.227C24 21.919 22.919 23 21.614 23H8.386C7.081 23 6 21.919 6 20.614V18h10.614C17.919 18 19 16.919 19 15.614V6h2.614C22.919 6 24 7.081 24 7.387z"/><path d="M18 3.386v12.228C18 16.919 16.919 18 15.614 18H2.386C1.081 18 0 16.919 0 15.614V3.386C0 2.081 1.081 1 2.386 1h13.228C16.919 1 18 2.081 18 3.386zM9 4.5C6.519 4.5 4.5 6.519 4.5 9S6.519 13.5 9 13.5 13.5 11.481 13.5 9 11.481 4.5 9 4.5z"/><path d="M9 6c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3z" fill="#0072C6"/></svg>
         <span id="outlookBtnText">SEND VIA OUTLOOK</span>
         <span id="outlookSpinner" class="hidden">
@@ -1126,8 +1139,7 @@
           </svg>
         </span>
       </button>
-      <p class="text-[10px] text-center text-[#906f73] mt-3 uppercase font-bold tracking-tighter">PI-DefenceDesk · Personal Injury Document Automation</p>
-      <div id="errorAlert" class="hidden mt-3 bg-red-50 border border-red-200 border-l-2 border-l-red-500 text-red-700 text-xs p-3 rounded"></div>
+      <div id="errorAlert" class="hidden mt-3 bg-error-container text-on-error-container text-xs p-3 rounded-lg"></div>
     </div>
   </aside>
 
@@ -1135,7 +1147,6 @@
 </form>
 
 <script>
-// Toggle section open/closed
 function toggleSection(header) {
   const body = header.nextElementSibling;
   const chevron = header.querySelector('.chevron');
@@ -1143,12 +1154,10 @@ function toggleSection(header) {
   chevron.style.transform = body.classList.contains('hidden') ? 'rotate(-90deg)' : 'rotate(0deg)';
 }
 
-// Scroll to section + highlight nav
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Open if closed
     const body = el.querySelector('.section-body');
     const chevron = el.querySelector('.chevron');
     if (body && body.classList.contains('hidden')) {
@@ -1156,7 +1165,6 @@ function scrollTo(id) {
       if (chevron) chevron.style.transform = 'rotate(0deg)';
     }
   }
-  // Update active nav
   document.querySelectorAll('#sideNav a').forEach(a => {
     a.classList.remove('active');
     if (a.getAttribute('href') === '#' + id) a.classList.add('active');
@@ -1164,7 +1172,22 @@ function scrollTo(id) {
   return false;
 }
 
-// WRC fields toggle
+// Track active nav item as user scrolls
+(function() {
+  const sections = document.querySelectorAll('[id^="sec-"]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('#sideNav a').forEach(a => {
+          a.classList.remove('active');
+          if (a.getAttribute('href') === '#' + entry.target.id) a.classList.add('active');
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+})();
+
 document.getElementById('courtSelect').addEventListener('change', function() {
   const isWrc = this.value.toLowerCase().includes('wrc');
   document.querySelectorAll('.wrc-field').forEach(el => {
@@ -1172,7 +1195,6 @@ document.getElementById('courtSelect').addEventListener('change', function() {
   });
 });
 
-// Select/clear all
 document.getElementById('selectAll').addEventListener('click', () => {
   document.querySelectorAll('input[name="documents"]').forEach(cb => cb.checked = true);
   updateCount();
@@ -1182,27 +1204,25 @@ document.getElementById('clearAll').addEventListener('click', () => {
   updateCount();
 });
 
-// Update selected count
 function updateCount() {
+  const total = document.querySelectorAll('input[name="documents"]').length;
   const n = document.querySelectorAll('input[name="documents"]:checked').length;
-  document.getElementById('selectedCount').textContent = n + ' of 10 selected';
+  document.getElementById('selectedCount').textContent = n + ' of ' + total + ' selected';
 }
 document.querySelectorAll('input[name="documents"]').forEach(cb => {
   cb.addEventListener('change', updateCount);
 });
 updateCount();
 
-// Form submit
 const form = document.getElementById('mainForm');
 const generateBtn = document.getElementById('generateBtn');
-const sidebarGenBtn = document.getElementById('sidebarGenBtn');
 const btnText = document.getElementById('btnText');
 const btnIcon = document.getElementById('btnIcon');
 const btnSpinner = document.getElementById('btnSpinner');
 const errorAlert = document.getElementById('errorAlert');
 
 function setLoading(loading) {
-  [generateBtn, sidebarGenBtn].forEach(b => b.disabled = loading);
+  generateBtn.disabled = loading;
   btnText.textContent = loading ? 'GENERATING…' : 'GENERATE & DOWNLOAD';
   btnIcon.classList.toggle('hidden', loading);
   btnSpinner.classList.toggle('hidden', !loading);
@@ -1217,15 +1237,9 @@ function showError(msg) {
 form.addEventListener('submit', function(e) {
   e.preventDefault();
   errorAlert.classList.add('hidden');
-
   const selected = document.querySelectorAll('input[name="documents"]:checked');
-  if (selected.length === 0) {
-    showError('Please select at least one document to generate.');
-    return;
-  }
-
+  if (selected.length === 0) { showError('Please select at least one document to generate.'); return; }
   setLoading(true);
-
   fetch('/generate', { method: 'POST', body: new FormData(form) })
     .then(res => {
       if (!res.ok) return res.json().then(d => { throw new Error(d.error || 'Generation failed.'); });
@@ -1239,13 +1253,9 @@ form.addEventListener('submit', function(e) {
       document.body.removeChild(a); URL.revokeObjectURL(url);
       setLoading(false);
     })
-    .catch(err => {
-      showError(err.message || 'An error occurred.');
-      setLoading(false);
-    });
+    .catch(err => { showError(err.message || 'An error occurred.'); setLoading(false); });
 });
 
-// Outlook send
 document.getElementById('outlookBtn').addEventListener('click', function() {
   const selected = document.querySelectorAll('input[name="documents"]:checked');
   if (selected.length === 0) { showError('Please select at least one document.'); return; }
@@ -1270,11 +1280,10 @@ document.getElementById('outlookBtn').addEventListener('click', function() {
     });
 });
 </script>
-<script>
-// ─── BILLING LIVE CALCULATOR ───
 
-let teCount = 3;   // already have rows 0-2
-let disbCount = 2; // already have rows 0-1
+<script>
+let teCount = 3;
+let disbCount = 2;
 
 function fmt(n) {
   return '€' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -1289,8 +1298,8 @@ function getVatRate() {
 
 function calcRow(inp) {
   const row = inp.closest('.te-row');
-  const hrs = parseFloat(row.querySelector('[name*="te_hours_"]').value) || 0;
-  const rate = parseFloat(row.querySelector('[name*="te_rate_"]').value) || 0;
+  const hrs  = parseFloat(row.querySelector('[name*="te_hours_"]').value) || 0;
+  const rate = parseFloat(row.querySelector('[name*="te_rate_"]').value)  || 0;
   row.querySelector('.te-amt').textContent = fmt(hrs * rate);
   recalcTotals();
 }
@@ -1300,26 +1309,23 @@ function calcDisb() { recalcTotals(); }
 function recalcTotals() {
   let fees = 0;
   document.querySelectorAll('.te-row').forEach(row => {
-    const hrs = parseFloat(row.querySelector('[name*="te_hours_"]')?.value) || 0;
-    const rate = parseFloat(row.querySelector('[name*="te_rate_"]')?.value) || 0;
+    const hrs  = parseFloat(row.querySelector('[name*="te_hours_"]')?.value) || 0;
+    const rate = parseFloat(row.querySelector('[name*="te_rate_"]')?.value)  || 0;
     fees += hrs * rate;
   });
-
   let disb = 0;
   document.querySelectorAll('.disb-row').forEach(row => {
     disb += parseFloat(row.querySelector('[name*="disb_amount_"]')?.value) || 0;
   });
-
   const vatRate = getVatRate();
-  const vat = fees * vatRate;
+  const vat   = fees * vatRate;
   const total = fees + vat + disb;
-
-  document.getElementById('teSubtotal').textContent = fmt(fees);
+  document.getElementById('teSubtotal').textContent  = fmt(fees);
   document.getElementById('disbSubtotal').textContent = fmt(disb);
-  document.getElementById('prevCharges').textContent = fmt(fees);
-  document.getElementById('prevVat').textContent = fmt(vat);
-  document.getElementById('prevDisb').textContent = fmt(disb);
-  document.getElementById('prevTotal').textContent = fmt(total);
+  document.getElementById('prevCharges').textContent  = fmt(fees);
+  document.getElementById('prevVat').textContent      = fmt(vat);
+  document.getElementById('prevDisb').textContent     = fmt(disb);
+  document.getElementById('prevTotal').textContent    = fmt(total);
 }
 
 function addTimeEntry() {
@@ -1327,15 +1333,15 @@ function addTimeEntry() {
   const row = document.createElement('div');
   row.className = 'te-row grid grid-cols-12 gap-1 items-center';
   row.innerHTML = `
-    <input name="te_date_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-    <input name="te_earner_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="Fee Earner"/>
-    <input name="te_desc_${n}" class="dwf-input col-span-5 text-[11px]" placeholder="Description of work..."/>
-    <input name="te_hours_${n}" class="dwf-input col-span-1 text-[11px] text-center" placeholder="0.0" oninput="calcRow(this)"/>
-    <input name="te_rate_${n}" class="dwf-input col-span-1 text-[11px] text-right" placeholder="0" oninput="calcRow(this)"/>
-    <div class="col-span-1 flex items-center gap-1">
-      <span class="text-[11px] font-semibold text-dwf-navy te-amt flex-1 text-right px-1">€0</span>
+    <input name="te_date_${n}"   class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+    <input name="te_earner_${n}" class="te-input col-span-2" placeholder="Fee Earner"/>
+    <input name="te_desc_${n}"   class="te-input col-span-5" placeholder="Description of work..."/>
+    <input name="te_hours_${n}"  class="te-input col-span-1 text-center" placeholder="0.0" oninput="calcRow(this)"/>
+    <input name="te_rate_${n}"   class="te-input col-span-1 text-right"  placeholder="0"   oninput="calcRow(this)"/>
+    <div class="col-span-1 flex items-center gap-0.5">
+      <span class="text-[11px] font-semibold text-primary te-amt flex-1 text-right px-1">€0</span>
       <button type="button" onclick="this.closest('.te-row').remove();recalcTotals()"
-        class="text-slate-400 hover:text-red-500 transition-colors" title="Remove">
+        class="text-outline hover:text-error transition-colors" title="Remove">
         <span class="material-symbols-outlined text-[14px]">close</span>
       </button>
     </div>`;
@@ -1347,35 +1353,20 @@ function addDisbRow() {
   const row = document.createElement('div');
   row.className = 'disb-row grid grid-cols-12 gap-1 items-center';
   row.innerHTML = `
-    <input name="disb_date_${n}" class="dwf-input col-span-2 text-[11px]" placeholder="DD/MM/YYYY"/>
-    <input name="disb_desc_${n}" class="dwf-input col-span-7 text-[11px]" placeholder="Disbursement description"/>
-    <input name="disb_amount_${n}" class="dwf-input col-span-2 text-[11px] text-right" placeholder="0" oninput="calcDisb()"/>
+    <input name="disb_date_${n}"   class="te-input col-span-2" placeholder="DD/MM/YYYY"/>
+    <input name="disb_desc_${n}"   class="te-input col-span-7" placeholder="Disbursement description"/>
+    <input name="disb_amount_${n}" class="te-input col-span-2 text-right" placeholder="0" oninput="calcDisb()"/>
     <button type="button" onclick="this.closest('.disb-row').remove();calcDisb()"
-      class="col-span-1 text-slate-400 hover:text-red-500 transition-colors text-center" title="Remove">
+      class="col-span-1 text-outline hover:text-error transition-colors text-center" title="Remove">
       <span class="material-symbols-outlined text-[14px]">close</span>
     </button>`;
   document.getElementById('disbRows').appendChild(row);
 }
 
-// Recalc when VAT rate field is changed
 document.addEventListener('input', e => {
   if (e.target.name === 'vat_rate') recalcTotals();
 });
-
-// ─── FORCE WHITE NAV TEXT ───
-
-// Force white nav text after Tailwind CDN finishes processing
-function applyNavColors() {
-  document.querySelectorAll('#sideNav a.nav-item').forEach(el => {
-    el.style.setProperty('color', '#ffffff', 'important');
-    el.style.setProperty('text-decoration', 'none', 'important');
-    el.querySelectorAll('span').forEach(s => s.style.setProperty('color', '#ffffff', 'important'));
-  });
-}
-// Run immediately + after Tailwind settles
-applyNavColors();
-setTimeout(applyNavColors, 100);
-setTimeout(applyNavColors, 500);
 </script>
+
 </body>
 </html>
