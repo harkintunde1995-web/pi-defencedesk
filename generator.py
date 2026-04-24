@@ -13,7 +13,7 @@ from docx.oxml import OxmlElement
 import os
 from datetime import datetime
 
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "generated")
+OUTPUT_DIR = "/tmp/generated"
 
 
 class DocumentGenerator:

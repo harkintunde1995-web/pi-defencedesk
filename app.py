@@ -13,7 +13,7 @@ from generator import DocumentGenerator
 
 app = Flask(__name__, template_folder="web_templates", static_folder="static")
 
-GENERATED_DIR = os.path.join(os.path.dirname(__file__), "generated")
+GENERATED_DIR = "/tmp/generated"
 os.makedirs(GENERATED_DIR, exist_ok=True)
 
 DOCUMENT_LABELS = {
